@@ -18,7 +18,7 @@ public class Main {
         AnswerStore answerStore = new AnswerStoreImpl();
         final Handler myHandler = new Handler(postStore, answerStore);
         //Basic Hello World response
-        get("/hello", (req, res) -> "Hello World \n");
+        get("/ping", (req, res) -> "OK");
 
         //Determine what to do with 2-field string
         get("/:action/:field1", (req,res)-> {

@@ -7,11 +7,11 @@ import edu.cooper.ee.ece366.LusterCode.model.User;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import java.util.ArrayList;
 
 public interface AnswerStore {
 
     String addAnswer(Post post, Answer ans);
+    //Answer addAnswer(CreateAnswerRequest createAnswerRequest);
 
     List<Answer> getAnswers(Post post);
 }

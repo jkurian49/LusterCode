@@ -22,6 +22,4 @@ public class Module {
     public List getPostList() { return postList; }
     public long getModuleID() {return moduleID; }
     public Timestamp getTime() { return timestamp; }
-
-
 }
