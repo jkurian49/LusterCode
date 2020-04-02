@@ -1,6 +1,6 @@
 package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.User;
-package edu.cooper.ee.ece366.LusterCode.store;
+import edu.cooper.ee.ece366.LusterCode.store;
 
 
 public class UserService {
@@ -16,7 +16,7 @@ public class UserService {
         return userStore.returnUser(name);
     }
 
-    public User removeUser(String name, String pass) {
+    public User removeUser(String name, String pass, ) {
         User deletedUser = userStore.returnUser(name);
         userStore.removeUser(String name, String pass);
         return deletedUser;
