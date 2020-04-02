@@ -10,33 +10,38 @@ import java.util.List;
 
 public class UserStoreImpl implements UserStore {
 
-    private final Map<User, Map<Integer, User>> UserList;
+    private final Map<String, User>> UserList;
 
     public UserStoreImpl() {
         this.UserList = new HashMap<>();
     }
 
-    public UserStoreImpl(Map<Integer, User> UserList) {
+    public UserStoreImpl(Map<String, User> UserList) {
         this.UserList = UserList;
     }
 
     @Override
     public void newUser(User user) {
-        throw new UnsupportedOperationException("not yet implemented");
+        User newU = new User(name, pass, firstName, lastName, email);
+        UserList.put(name, newU);
     }
 
     @Override
     public void removeUser(User user, Item item) {
-        throw new UnsupportedOperationException("not yet implemented");
+        UserList.remove(name);
     }
 
     @Override
-    public void modifyPassword(User user, Item item, Integer quantity) {
-        throw new UnsupportedOperationException("not yet implemented");
+    public void modifyPassword(User user, String password) {
+        UserList.get(name).pass = password;
     }
 
     @Override
-    public boolean isUser(User user) {
-        throw new UnsupportedOperationException("not yet implemented");
+    public boolean isUser(String name) {
+        return userList.containsKey(name);
+    }
+
+    public boolean returnUser(User user) {
+        return userList.get(name);
     }
 }
