@@ -7,7 +7,18 @@
     <groupId>org.example</groupId>
     <artifactId>LusterCode</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <dependencies>
+
+        <dependencyManagement>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jdbi</groupId>
+                    <artifactId>jdbi3-bom</artifactId>
+                    <type>pom</type>
+                    <version>3.12.2</version>
+                    <scope>import</scope>
+                </dependency>
+            </dependencies>
+        </dependencyManagement>
 
         <dependency>
             <groupId>com.sparkjava</groupId>
@@ -31,7 +42,16 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+            <version>3.12.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+        </dependency>
 
     </dependencies>
 

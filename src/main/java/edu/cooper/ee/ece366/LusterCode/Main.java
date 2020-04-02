@@ -1,20 +1,38 @@
 package edu.cooper.ee.ece366.LusterCode;
 
 import edu.cooper.ee.ece366.LusterCode.store.AnswerStore;
-import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreImpl;
+import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.store.PostStore;
 import edu.cooper.ee.ece366.LusterCode.store.PostStoreImpl;
+import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
+import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
 import org.apache.log4j.BasicConfigurator;
 import javax.naming.directory.Attributes;
+import com.google.gson.Gson;
 import java.util.Hashtable;
 import static spark.Spark.*;
 import edu.cooper.ee.ece366.LusterCode.*;
+import org.jdbi.v3.core.Jdbi;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 // This comment is to check that the merge worked
 
 public class Main {
     public static void main(String[] args) {
-        PostStore postStore = new PostStoreImpl();
+
+        AnswerStore answerStore = new AnswerStoreJdbi();
+        AnswerService answerService = new AnswerService(answerStore);
+        final AnswerHandler answerHandler = new AnswerHandler();
+        Gson gson = new Gson();
+        JsonTransformer jsonTransformer = new JsonTransformer();
+        String url = "jdbc:h2:~/LCdb";
+        Jdbi jdbi = Jdbi.create(url);
+
+        get("/ping", (req, res) -> "OK");
+        Spark.get("/answer", (req, res) -> answerHandler.createAnswerRequest(req), jsonTransformer);
+
+       /* PostStore postStore = new PostStoreImpl();
         AnswerStore answerStore = new AnswerStoreImpl();
         final Handler myHandler = new Handler(postStore, answerStore);
         //Basic Hello World response
@@ -89,7 +107,7 @@ public class Main {
                 return "Hello: New User Requested\n" + handlerReply + "\n";
             }
             return "Hello: Nothing Happened" + "\n"; //None of the conditions were met, and so nothing was done
-        });
+        });*/
 
     }
 }

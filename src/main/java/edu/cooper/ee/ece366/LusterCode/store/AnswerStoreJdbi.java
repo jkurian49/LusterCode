@@ -1,11 +1,11 @@
-/*
 package edu.cooper.ee.ece366.LusterCode.store;
 
-import edu.cooper.ee.ece366.Lustercode.Handler;
+import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
+import edu.cooper.ee.ece366.LusterCode.model.Answer;
+import java.util.List;
 import org.jdbi.v3.core.Jdbi;
 
-
-public class AnswerStoreJdbi extends AnswerStore{
+public class AnswerStoreJdbi implements AnswerStore{
 
     private final Jdbi jdbi;
     public AnswerStoreJdbi(Jdbi jdbi) {
@@ -16,38 +16,23 @@ public class AnswerStoreJdbi extends AnswerStore{
         jdbi.withHandle(
                 handle ->
                         handle.execute(
-                                "create table items (id bigint auto_increment, name varchar(255), cost double );"));
+                                "create table items (answerID bigint auto_increment, username varchar(255), askPostID bigint," +
+                                        "answerType varchar(255), content varchar(255));"));
     }
 
     @Override
-    public List<Item> getItems() {
-        return jdbi.withHandle(
-                handle ->
-                        handle.createQuery("select id, name, cost from items").mapToBean(Item.class).list());
-    }
-
-    @Override
-    public Item getItem(final Long id) {
+    public Item addAnswer(final Handler.CreateAnswerRequest createAnswerRequest) {
         return jdbi.withHandle(
                 handle ->
                         handle
-                                .createQuery("select id, name, cost from items where id = :id")
-                                .bind("id", id)
-                                .mapToBean(Item.class)
-                                .one());
-    }
-
-    @Override
-    public Item addAnswer(final Handler.CreateItemRequest createItemRequest) {
-        return jdbi.withHandle(
-                handle ->
-                        handle
-                                .createUpdate("insert into answer (post, ans) values (:post, :ans)")
-                                .bind("post", createItemRequest.getPost())
-                                .bind("ans", createItemRequest.getAnswer())
+                                .createUpdate("insert into answer (username, askPostID, answerType, content)..." +
+                                        " values (:username, :username, :askPostID, :answerType, :content)")
+                                .bind("username", createAnswerRequest.getUsername())
+                                .bind("askPostID", createAnswerRequest.getAskPostID())
+                                .bind("answerType", createAnswerRequest.getAnswerType())
+                                .bind("content", createAnswerRequest.getContent())
                                 .executeAndReturnGeneratedKeys("answerID")
                                 .mapToBean(Answer.class)
                                 .one());
     }
 }
-*/
