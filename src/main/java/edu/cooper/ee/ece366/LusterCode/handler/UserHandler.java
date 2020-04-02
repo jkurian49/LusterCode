@@ -28,6 +28,7 @@ public class UserHandler {
     public String userRemover(Request req) {
         String pass = req.params(":field2");
         String name = req.params(":field1");
+
         return service.removeUser(name, pass);
     }
 
