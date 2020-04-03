@@ -11,6 +11,11 @@ public class AnswerHandler {
     private final AnswerService answerService;
     private final Gson gson;
 
+    public AnswerHandler(AnswerService answerService, Gson gson) {
+        this.answerService = answerService;
+        this.gson = gson;
+    }
+
     public Answer createAnswer(final Request req) {
         CreateAnswerRequest createAnswerRequest = gson.fromJson(req.body(), CreateAnswerRequest.class);
         return answerService.createAnswer(createAnswerRequest);

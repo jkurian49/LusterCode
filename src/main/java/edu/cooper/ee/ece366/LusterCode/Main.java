@@ -1,36 +1,28 @@
 package edu.cooper.ee.ece366.LusterCode;
 
-import edu.cooper.ee.ece366.LusterCode.store.AnswerStore;
+import edu.cooper.ee.ece366.LusterCode.service.AnswerService;
 import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
-import edu.cooper.ee.ece366.LusterCode.store.PostStore;
-import edu.cooper.ee.ece366.LusterCode.store.PostStoreImpl;
+import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
 import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
-import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
-import org.apache.log4j.BasicConfigurator;
-import javax.naming.directory.Attributes;
 import com.google.gson.Gson;
-import java.util.Hashtable;
 import static spark.Spark.*;
-import edu.cooper.ee.ece366.LusterCode.*;
 import org.jdbi.v3.core.Jdbi;
-import java.sql.Connection;
-import java.sql.DriverManager;
-
-// This comment is to check that the merge worked
 
 public class Main {
     public static void main(String[] args) {
-
-        AnswerStore answerStore = new AnswerStoreJdbi();
-        AnswerService answerService = new AnswerService(answerStore);
-        final AnswerHandler answerHandler = new AnswerHandler();
         Gson gson = new Gson();
+        String url = "jdbc:mysql://localhost:3306/LusterCode?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
+        String username = "main";
+        String password = "Lusterman";
+        Jdbi jdbi = Jdbi.create(url, username, password);
+        AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
+        answerStore.populateDb();
+        AnswerService answerService = new AnswerService(answerStore);
+        AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
         JsonTransformer jsonTransformer = new JsonTransformer();
-        String url = "jdbc:h2:~/LCdb";
-        Jdbi jdbi = Jdbi.create(url);
 
         get("/ping", (req, res) -> "OK");
-        Spark.get("/answer", (req, res) -> answerHandler.createAnswerRequest(req), jsonTransformer);
+        post("/answer", (req, res) -> answerHandler.createAnswer(req), jsonTransformer);
 
        /* PostStore postStore = new PostStoreImpl();
         AnswerStore answerStore = new AnswerStoreImpl();
