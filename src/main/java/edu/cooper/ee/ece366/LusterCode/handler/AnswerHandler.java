@@ -19,6 +19,8 @@ public class AnswerHandler {
     public Answer createAnswer(final Request req) {
         CreateAnswerRequest createAnswerRequest = gson.fromJson(req.body(), CreateAnswerRequest.class);
         return answerService.createAnswer(createAnswerRequest);
+        //Answer answer = gson.fromJson(req.body(), Answer.class);
+        //return answerService.createAnswer(answer);
     }
 
     public class CreateAnswerRequest {

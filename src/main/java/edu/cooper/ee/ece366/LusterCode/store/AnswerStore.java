@@ -12,7 +12,6 @@ import java.util.List;
 
 public interface AnswerStore {
 
-    //old String addAnswer(Post post, Answer ans);
     Answer addAnswer(CreateAnswerRequest createAnswerRequest);
 
     //List<Answer> getAnswers(Post post);
