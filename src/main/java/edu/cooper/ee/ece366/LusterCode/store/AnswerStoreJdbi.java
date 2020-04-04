@@ -18,17 +18,16 @@ public class AnswerStoreJdbi implements AnswerStore{
                         handle.execute("CREATE TABLE IF NOT EXISTS answers (id bigint auto_increment, username varchar(255), askPostID bigint, answerType varchar(255), content varchar(255), primary key(id));");
                 });
     }
-
     @Override
-    public Answer addAnswer(final AnswerHandler.CreateAnswerRequest createAnswerRequest) {
+    public Answer addAnswer(final Answer answer) {
         return jdbi.withHandle(
                 handle ->
                         handle
                                 .createUpdate("INSERT INTO answers (username, askPostID, answerType, content) VALUES (:username, :askPostID, :answerType, :content)")
-                                .bind("username", createAnswerRequest.getUsername())
-                                .bind("askPostID", createAnswerRequest.getAskPostID())
-                                .bind("answerType", createAnswerRequest.getAnswerType())
-                                .bind("content", createAnswerRequest.getContent())
+                                .bind("username", answer.getUsername())
+                                .bind("askPostID", answer.getAskPostID())
+                                .bind("answerType", answer.getAnswerType())
+                                .bind("content", answer.getContent())
                                 .executeAndReturnGeneratedKeys("id")
                                 .mapToBean(Answer.class)
                                 .one());
