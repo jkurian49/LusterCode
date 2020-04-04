@@ -17,28 +17,7 @@ public class AnswerHandler {
     }
 
     public Answer createAnswer(final Request req) {
-        CreateAnswerRequest createAnswerRequest = gson.fromJson(req.body(), CreateAnswerRequest.class);
-        return answerService.createAnswer(createAnswerRequest);
-        //Answer answer = gson.fromJson(req.body(), Answer.class);
-        //return answerService.createAnswer(answer);
-    }
-
-    public class CreateAnswerRequest {
-        private final String username;
-        private final long askPostID;
-        private final String answerType;
-        private final String content;
-
-        public CreateAnswerRequest(String username, Long askPostID, String answerType, String content) {
-            this.username = username;
-            this.askPostID = askPostID;
-            this.answerType = answerType;
-            this.content = content;
-        }
-
-        public String getUsername() { return username; }
-        public Long getAskPostID() { return askPostID; }
-        public String getAnswerType() { return answerType; }
-        public String getContent() { return content; }
+        Answer answer = gson.fromJson(req.body(), Answer.class);
+        return answerService.createAnswer(answer);
     }
 }
