@@ -1,9 +1,8 @@
 package edu.cooper.ee.ece366.LusterCode.store;
 
-import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
 import edu.cooper.ee.ece366.LusterCode.model.Answer;
-import java.util.List;
 import org.jdbi.v3.core.Jdbi;
+import java.util.List;
 
 public class AnswerStoreJdbi implements AnswerStore{
 
@@ -29,6 +28,27 @@ public class AnswerStoreJdbi implements AnswerStore{
                                 .bind("answerType", answer.getAnswerType())
                                 .bind("content", answer.getContent())
                                 .executeAndReturnGeneratedKeys("id")
+                                .mapToBean(Answer.class)
+                                .one());
+    }
+    @Override
+    public Answer getAnswer(final Long answerID) {
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                            .createQuery("SELECT username, askPostID, answerType, content FROM answers WHERE id = :id")
+                            .bind("id", answerID)
+                            .mapToBean(Answer.class)
+                            .one());
+    }
+
+    @Override
+    public Answer deleteAnswer(final Long answerID) {
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("DELETE FROM answers WHERE id = :id")
+                                .bind("id", answerID)
                                 .mapToBean(Answer.class)
                                 .one());
     }

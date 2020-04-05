@@ -6,5 +6,9 @@ public interface AnswerStore {
 
     Answer addAnswer(Answer answer);
 
+    Answer getAnswer(Long id);
+
+    Answer deleteAnswer(Long id);
+
     //List<Answer> getAnswers(Post post);
 }

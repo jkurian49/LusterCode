@@ -14,4 +14,12 @@ public class AnswerService {
     public Answer createAnswer(final Answer answer){
         return answerStore.addAnswer(answer);
     }
+
+    public Answer getAnswer(final Long id) {
+        return answerStore.getAnswer(id);
+    }
+
+    public Answer deleteAnswer(final Long id) {
+        return answerStore.deleteAnswer(id);
+    }
 }

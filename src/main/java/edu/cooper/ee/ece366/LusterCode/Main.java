@@ -5,8 +5,8 @@ import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
 import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
 import com.google.gson.Gson;
-import static spark.Spark.*;
 import org.jdbi.v3.core.Jdbi;
+import spark.Spark;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,8 +21,19 @@ public class Main {
         AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
         JsonTransformer jsonTransformer = new JsonTransformer();
 
-        get("/ping", (req, res) -> "OK");
-        post("/answer", (req, res) -> answerHandler.createAnswer(req), jsonTransformer);
+        Spark.get("/ping", (req, res) -> "OK");
+        // user routing
+        // Spark.post("/user", (req, res) -> userHandler.createUser(req), jsonTransformer);
+        // Spark.get("/user/:userID", (req, res) -> userHandler.getUser(req), jsonTransformer);
+        // post routing
+        // Spark.post("/post", (req, res) -> postHandler.createPost(req), jsonTransformer);
+        // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req), jsonTransformer);
+        // answer routing
+        Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
+        Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
+        Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
+
+
 
        /* PostStore postStore = new PostStoreImpl();
         AnswerStore answerStore = new AnswerStoreImpl();
