@@ -14,7 +14,7 @@ public class AnswerStoreJdbi implements AnswerStore{
     public void populateDb() {
         jdbi.useHandle(
                 handle ->{
-                        handle.execute("CREATE TABLE IF NOT EXISTS answers (id bigint auto_increment, username varchar(255), askPostID bigint, answerType varchar(255), content varchar(255), primary key(id));");
+                        handle.execute("CREATE TABLE IF NOT EXISTS answers (id bigint auto_increment, username varchar(255), askPostID bigint, answerType varchar(255), content varchar(255), timestamp datetime, primary key(id));");
                 });
     }
     @Override
@@ -22,11 +22,12 @@ public class AnswerStoreJdbi implements AnswerStore{
         return jdbi.withHandle(
                 handle ->
                         handle
-                                .createUpdate("INSERT INTO answers (username, askPostID, answerType, content) VALUES (:username, :askPostID, :answerType, :content)")
+                                .createUpdate("INSERT INTO answers (username, askPostID, answerType, content, timestamp) VALUES (:username, :askPostID, :answerType, :content, :timestamp)")
                                 .bind("username", answer.getUsername())
                                 .bind("askPostID", answer.getAskPostID())
                                 .bind("answerType", answer.getAnswerType())
                                 .bind("content", answer.getContent())
+                                .bind("timestamp", answer.getTimestamp())
                                 .executeAndReturnGeneratedKeys("id")
                                 .mapToBean(Answer.class)
                                 .one());
@@ -36,7 +37,7 @@ public class AnswerStoreJdbi implements AnswerStore{
         return jdbi.withHandle(
                 handler ->
                         handler
-                            .createQuery("SELECT id, username, askPostID, answerType, content FROM answers WHERE id = :id")
+                            .createQuery("SELECT id, username, askPostID, answerType, content, timestamp FROM answers WHERE id = :id")
                             .bind("id", answerID)
                             .mapToBean(Answer.class)
                             .one());
