@@ -1,33 +1,29 @@
 package edu.cooper.ee.ece366.LusterCode.model;
 
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
-import java.util.List;
+import com.google.gson.annotations.Expose;
 
 public class Answer {
     // Instance Variables
-    private final String username;
-    private final Long askPostID;
-    private final String answerType; // with code or post reply
-    private final String content; // either a file path to code or a reply text
+    @Expose private final Long id;
+    @Expose private final String username;
+    @Expose private final Long askPostID;
+    @Expose private final String answerType; // with code or post reply
+    @Expose private final String content; // either a file path to code or a reply text
     //private final Timestamp timestamp;
 
-    public Answer(String username, Long askPostID, String answerType, String content){
+    public Answer(Long id, String username, Long askPostID, String answerType, String content){
+        this.id = id;
         this.username = username;
         this.askPostID = askPostID;
         this.answerType = answerType;
         this.content = content;
-        //timestamp = new Timestamp(System.currentTimeMillis());
     }
 
+    public Long getID() { return id; }
     public String getUsername() { return username; }
     public Long getAskPostID() { return askPostID; }
     public String getAnswerType() { return answerType; }
     public String getContent() { return content; }
     //public Timestamp getTime() { return timestamp; }
 
-    static final AtomicLong NEXT_ID = new AtomicLong(0);
-    final long answerID = NEXT_ID.getAndIncrement();
 }

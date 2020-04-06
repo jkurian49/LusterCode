@@ -21,6 +21,10 @@ public class Main {
         AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
         JsonTransformer jsonTransformer = new JsonTransformer();
 
+        Spark.exception(Exception.class, (exception, request, response) -> {
+            exception.printStackTrace();
+        });
+
         Spark.get("/ping", (req, res) -> "OK");
         // user routing
         // Spark.post("/user", (req, res) -> userHandler.createUser(req), jsonTransformer);

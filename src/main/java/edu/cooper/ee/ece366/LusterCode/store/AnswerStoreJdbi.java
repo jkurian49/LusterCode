@@ -36,7 +36,7 @@ public class AnswerStoreJdbi implements AnswerStore{
         return jdbi.withHandle(
                 handler ->
                         handler
-                            .createQuery("SELECT username, askPostID, answerType, content FROM answers WHERE id = :id")
+                            .createQuery("SELECT id, username, askPostID, answerType, content FROM answers WHERE id = :id")
                             .bind("id", answerID)
                             .mapToBean(Answer.class)
                             .one());
