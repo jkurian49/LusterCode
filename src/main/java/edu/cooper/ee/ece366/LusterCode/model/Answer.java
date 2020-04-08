@@ -53,6 +53,4 @@ public class Answer {
     public void setContent(String content) {this.content = content; }
     public void setTimestamp(LocalDateTime timestamp) {this.timestamp = timestamp; }
 
-    //public Timestamp getTime() { return timestamp; }
-
 }

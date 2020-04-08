@@ -1,6 +1,5 @@
 package edu.cooper.ee.ece366.LusterCode.handler;
 
-import org.jdbi.v3.core.result.ResultIterator;
 import spark.Request;
 import spark.Response;
 import com.google.gson.Gson;
