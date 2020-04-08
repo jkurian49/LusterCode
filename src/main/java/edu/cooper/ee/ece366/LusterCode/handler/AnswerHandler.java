@@ -28,7 +28,12 @@ public class AnswerHandler {
         return answerService.getAnswer(answerID);
     }
 
-    public Answer deleteAnswer(final Request req, final Response res) {
+    public List<Answer> getAnswers (final Request req, final Response res) {
+        Long askPostID = Long.valueOf(req.params(":askPostID"));
+        return answerService.getAnswers(askPostID);
+    }
+
+    public String deleteAnswer(final Request req, final Response res) {
         Long answerID = Long.valueOf(req.params(":answerID"));
         return answerService.deleteAnswer(answerID);
     }

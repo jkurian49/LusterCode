@@ -2,6 +2,8 @@ package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.Answer;
 import edu.cooper.ee.ece366.LusterCode.store.AnswerStore;
 
+import java.util.List;
+
 
 public class AnswerService {
 
@@ -19,7 +21,12 @@ public class AnswerService {
         return answerStore.getAnswer(id);
     }
 
-    public Answer deleteAnswer(final Long id) {
-        return answerStore.deleteAnswer(id);
+    public List<Answer> getAnswers(final Long askPostID) {return answerStore.getAnswers(askPostID);}
+
+    public String deleteAnswer(final Long id) {
+
+        Integer deletion = answerStore.deleteAnswer(id);
+        if (deletion == 1) {return "DELETION SUCCESSFUL"; }
+        else {return "ERROR DELETING FROM DATABASE"; }
     }
 }

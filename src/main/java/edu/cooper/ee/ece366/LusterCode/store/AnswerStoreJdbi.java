@@ -18,8 +18,8 @@ public class AnswerStoreJdbi implements AnswerStore{
                 });
     }
     @Override
-    public Answer addAnswer(final Answer answer) {
-        return jdbi.withHandle(
+    public Answer addAnswer(Answer answer) {
+        Long id = jdbi.withHandle(
                 handle ->
                         handle
                                 .createUpdate("INSERT INTO answers (username, askPostID, answerType, content, timestamp) VALUES (:username, :askPostID, :answerType, :content, :timestamp)")
@@ -29,8 +29,13 @@ public class AnswerStoreJdbi implements AnswerStore{
                                 .bind("content", answer.getContent())
                                 .bind("timestamp", answer.getTimestamp())
                                 .executeAndReturnGeneratedKeys("id")
-                                .mapToBean(Answer.class)
+                                .mapTo(Long.class)
                                 .one());
+
+        answer.setID(id);
+        return answer;
+
+
     }
     @Override
     public Answer getAnswer(final Long answerID) {
@@ -42,15 +47,27 @@ public class AnswerStoreJdbi implements AnswerStore{
                             .mapToBean(Answer.class)
                             .one());
     }
+    @Override
+    public List<Answer> getAnswers(final Long askPostID) {
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("SELECT id, username, askPostID, answerType, content, timestamp FROM answers WHERE askPostID = :askPostID")
+                                .bind("askPostID", askPostID)
+                                .mapToBean(Answer.class)
+                                .list());
+    }
+
 
     @Override
-    public Answer deleteAnswer(final Long answerID) {
-        return jdbi.withHandle(
+    public Integer deleteAnswer(final Long answerID) {
+         return jdbi.withHandle(
                 handler ->
                         handler
                                 .createQuery("DELETE FROM answers WHERE id = :id")
                                 .bind("id", answerID)
-                                .mapToBean(Answer.class)
+                                .mapToBean(Integer.class)
                                 .one());
+
     }
 }

@@ -35,6 +35,7 @@ public class Main {
         // answer routing
         Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
         Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
+        Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
         Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 
 

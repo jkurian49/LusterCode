@@ -21,10 +21,19 @@ public class Answer {
         this.timestamp = timestamp;
     }
 
+    public Answer(String username, Long askPostID, String answerType, String content, LocalDateTime timestamp){
+        this.id = -1L;
+        this.username = username;
+        this.askPostID = askPostID;
+        this.answerType = answerType;
+        this.content = content;
+        this.timestamp = timestamp;
+    }
+
     public Answer(){
-        this.id = null;
+        this.id = -1L;
         this.username = null;
-        this.askPostID = null;
+        this.askPostID = -1L;
         this.answerType = null;
         this.content = null;
         this.timestamp = LocalDateTime.now();
