@@ -40,9 +40,10 @@
                 const response = await fetch('localhost:4567/post', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(body)
+                    body: JSON.stringify({username:'Theo', postType:'forum', content:body,tags:'tags', likes:0})
                 });
-                console.log(response.json())
+                const content = await response.json();
+                console.log(content);
             }
         </script>
 
