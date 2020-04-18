@@ -6,10 +6,9 @@ edu/cooper/ee/ece366/LusterCode/Main.class
 edu/cooper/ee/ece366/LusterCode/handler/AnswerHandler.class
 edu/cooper/ee/ece366/LusterCode/handler/PostHandler.class
 edu/cooper/ee/ece366/LusterCode/store/PostStore.class
-edu/cooper/ee/ece366/LusterCode/store/ModuleStore.class
 edu/cooper/ee/ece366/LusterCode/model/User.class
-edu/cooper/ee/ece366/LusterCode/store/AnswerStoreJdbi.class
 edu/cooper/ee/ece366/LusterCode/model/Post.class
 edu/cooper/ee/ece366/LusterCode/service/AnswerService.class
-edu/cooper/ee/ece366/LusterCode/store/PostStoreImpl.class
+edu/cooper/ee/ece366/LusterCode/store/AnswerStoreJdbi.class
 edu/cooper/ee/ece366/LusterCode/model/Answer.class
+edu/cooper/ee/ece366/LusterCode/store/PostStoreImpl.class

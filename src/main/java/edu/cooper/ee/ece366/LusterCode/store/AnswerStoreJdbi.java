@@ -31,12 +31,10 @@ public class AnswerStoreJdbi implements AnswerStore{
                                 .executeAndReturnGeneratedKeys("id")
                                 .mapTo(Long.class)
                                 .one());
-
         answer.setID(id);
         return answer;
-
-
     }
+
     @Override
     public Answer getAnswer(final Long answerID) {
         return jdbi.withHandle(

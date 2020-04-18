@@ -10,20 +10,22 @@ import spark.Spark;
 
 public class Main {
     public static void main(String[] args) {
-//        Gson gson = new Gson();
-//        String url = "jdbc:mysql://localhost:3306/LusterCode?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
-//        String username = "main";
-//        String password = "Lusterman";
-//        Jdbi jdbi = Jdbi.create(url, username, password);
-//        AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
-//        answerStore.populateDb();
-//        AnswerService answerService = new AnswerService(answerStore);
-//        AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
-//        JsonTransformer jsonTransformer = new JsonTransformer();
-//
-//        Spark.exception(Exception.class, (exception, request, response) -> {
-//            exception.printStackTrace();
-//        });
+
+        Gson gson = new Gson();
+        String url = "jdbc:mysql://localhost:3306/LusterCode?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
+        String username = "main";
+        String password = "Lusterman";
+        Jdbi jdbi = Jdbi.create(url, username, password);
+        AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
+        answerStore.populateDb();
+        AnswerService answerService = new AnswerService(answerStore);
+        AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
+        JsonTransformer jsonTransformer = new JsonTransformer();
+
+        Spark.exception(Exception.class, (exception, request, response) -> {
+            exception.printStackTrace();
+        });
+
 
         Spark.get("/ping", (req, res) -> "OK\n");
         // user routing
@@ -33,10 +35,10 @@ public class Main {
         // Spark.post("/post", (req, res) -> postHandler.createPost(req), jsonTransformer);
         // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req), jsonTransformer);
         // answer routing
-//        Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
-//        Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
-//        Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
-//        Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
+        Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
+        Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
+        Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
+        Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 //
 
 
