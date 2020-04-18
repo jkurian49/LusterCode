@@ -36,6 +36,10 @@ public class PostStoreJdbi implements PostStore{
         post.setID(id);
         return post;
     }
+
+//    @Override
+//    public Post editPost(Long postID, Post post);
+
 }
 
 //    @Override
