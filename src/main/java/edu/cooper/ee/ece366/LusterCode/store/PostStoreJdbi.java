@@ -21,7 +21,7 @@ public class PostStoreJdbi implements PostStore{
         Long id = jdbi.withHandle(
                 handle ->
                         handle
-                                .createUpdate("INSERT INTO post (username, postType, content, tags, likes, timestamp) VALUES (:username, :postType, :content, :tags, :likes, :timestamp)")
+                                .createUpdate("INSERT INTO posts (username, postType, content, tags, likes, timestamp) VALUES (:username, :postType, :content, :tags, :likes, :timestamp)")
                                 .bind("username", post.getUsername())
                                 .bind("postType", post.getPostType())
                                 .bind("content", post.getContent())

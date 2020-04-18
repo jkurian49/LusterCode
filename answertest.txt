@@ -1,3 +1,3 @@
 curl localhost:4567/answer -X post -d '{"username":"Jason", "askPostID":"1", "answerType":"reply", "content":"thisismyanswer", "timstamp":"today"}' -H "Content-Type: application/json"
 
-curl localhost:4567/answer -X post -d '{"username":"Theo", "postType":"Question", "content":"Pleasehelp", "tags":"noob", "likes":"0"}' -H "Content-Type: application/json"
+curl localhost:4567/post -X post -d '{"username":"Theo", "postType":"Question", "content":"Pleasehelp", "tags":"noob", "likes":"0"}' -H "Content-Type: application/json"

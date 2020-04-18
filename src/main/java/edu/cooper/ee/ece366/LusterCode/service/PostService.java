@@ -15,12 +15,12 @@ public class PostService {
 
 //  public Post addTags(Post post) { }
 
-    public Post editPost(Long postID, Post post) { return postStore.editPost(postID, post); }
+/*    public Post editPost(Long postID, Post post) { return postStore.editPost(postID, post); }
 
     public Post returnPost(Long postID) { return postStore.returnPost(postID); }
 
     public String likePost(Long postID) { return postStore.likePost(postID); }
 
-    public String deletePost(Long postID) { return postStore.deletePost(postID); }
+    public String deletePost(Long postID) { return postStore.deletePost(postID); }*/
 
 }

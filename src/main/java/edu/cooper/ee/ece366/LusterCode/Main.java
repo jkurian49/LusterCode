@@ -52,7 +52,7 @@ public class Main {
 //
 
         Spark.post("/post", postHandler::createPost, gson::toJson);
-        Spark.get("/post/:postID", postHandler::returnPost, gson::toJson);
+//        Spark.get("/post/:postID", postHandler::returnPost, gson::toJson);
 
 
        /* PostStore postStore = new PostStoreImpl();

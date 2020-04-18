@@ -24,6 +24,7 @@ public class PostHandler {
         return postService.createPost(post);
     }
 
+/*
     public Post editPost(final Request req, final Response res) {
         Long postID = Long.valueOf(req.params(":postID"));
         Post post = gson.fromJson(req.body(), Post.class);
@@ -49,4 +50,5 @@ public class PostHandler {
         Long postID = Long.valueOf(req.params(":postID"));
         return postService.deletePost(postID);
     }
+*/
 }
