@@ -24,33 +24,22 @@ public class PostStoreJdbi implements PostStore{
                                 .createUpdate("INSERT INTO post (username, postType, content, tags, likes, timestamp) VALUES (:username, :postType, :content, :tags, :likes, :timestamp)")
                                 .bind("username", post.getUsername())
                                 .bind("postType", post.getPostType())
-                                .bind()
-        )
+                                .bind("content", post.getContent())
+                                .bind("tags", post.getTags())
+                                .bind("likes", post.getLikes())
+                                .bind("timestamp", post.getTimestamp())
+                                .executeAndReturnGeneratedKeys("id")
+                                .mapTo(Long.class)
+                                .one()
+        );
+
+        post.setID(id);
+        return post;
     }
 }
 
 /*
 
-    @Override
-    public Answer addAnswer(Answer answer) {
-        Long id = jdbi.withHandle(
-                handle ->
-                        handle
-                                .createUpdate("INSERT INTO answers (username, askPostID, answerType, content, timestamp) VALUES (:username, :askPostID, :answerType, :content, :timestamp)")
-                                .bind("username", answer.getUsername())
-                                .bind("askPostID", answer.getAskPostID())
-                                .bind("answerType", answer.getAnswerType())
-                                .bind("content", answer.getContent())
-                                .bind("timestamp", answer.getTimestamp())
-                                .executeAndReturnGeneratedKeys("id")
-                                .mapTo(Long.class)
-                                .one());
-
-        answer.setID(id);
-        return answer;
-
-
-    }
     @Override
     public Answer getAnswer(final Long answerID) {
         return jdbi.withHandle(
