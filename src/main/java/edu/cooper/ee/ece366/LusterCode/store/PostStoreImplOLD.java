@@ -1,3 +1,5 @@
+/*
+
 package edu.cooper.ee.ece366.LusterCode.store;
 
 import edu.cooper.ee.ece366.LusterCode.model.Post;
@@ -7,15 +9,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostStoreImpl implements PostStore {
+public class PostStoreImplOLD implements PostStoreOLD {
 
     private Map<Long, Post> postList;
 
-    public PostStoreImpl() {
+    public PostStoreImplOLD() {
         this.postList = new HashMap<>();
     }
-    public PostStoreImpl(Map<Long, Post> postList) {this.postList = postList;}
-    public PostStoreImpl(Post post) {
+    public PostStoreImplOLD(Map<Long, Post> postList) {this.postList = postList;}
+    public PostStoreImplOLD(Post post) {
         postList.put(post.getId(), post);
     }
 
@@ -49,3 +51,4 @@ public class PostStoreImpl implements PostStore {
 
 }
 
+*/
