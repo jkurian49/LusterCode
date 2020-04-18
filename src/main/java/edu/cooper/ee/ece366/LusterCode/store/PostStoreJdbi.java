@@ -2,14 +2,11 @@ package edu.cooper.ee.ece366.LusterCode.store;
 
 import edu.cooper.ee.ece366.LusterCode.model.Post;
 import org.jdbi.v3.core.Jdbi;
-import java.util.List;
 
 public class PostStoreJdbi implements PostStore{
 
     private final Jdbi jdbi;
-    public PostStoreJdbi(Jdbi jdbi) {
-        this.jdbi = jdbi;
-    }
+    public PostStoreJdbi(Jdbi jdbi) { this.jdbi = jdbi; }
 
     public void populateDb() {
         jdbi.useHandle(
@@ -25,7 +22,9 @@ public class PostStoreJdbi implements PostStore{
                 handle ->
                         handle
                                 .createUpdate("INSERT INTO post (username, postType, content, tags, likes, timestamp) VALUES (:username, :postType, :content, :tags, :likes, :timestamp)")
-                                .bind("username", )
+                                .bind("username", post.getUsername())
+                                .bind("postType", post.getPostType())
+                                .bind()
         )
     }
 }

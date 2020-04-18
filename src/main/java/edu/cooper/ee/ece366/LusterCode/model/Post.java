@@ -28,14 +28,14 @@ public class Post {
 
     //for creating object to be stored in database, which creates its own ID
     public Post(String username, String postType, String content,
-                String tags, Integer likes, LocalDateTime timestamp){
+                String tags, Integer likes){
         this.id = id;
         this.username = username;
         this.postType = postType;
         this.content = content;
         this.tags = tags;
         this.likes = likes;
-        this.timestamp = timestamp;
+        this.timestamp = LocalDateTime.now();
     }
 
     //blank post, just because
