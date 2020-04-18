@@ -57,12 +57,12 @@ public class Post {
     public Integer getLikes() { return likes; }
     public LocalDateTime getTimestamp() { return timestamp; }
 
-    public void setID() { this.id = id; }
-    public void setUsername() { this.username = username; }
-    public void setPostType() { this.postType = postType; }
-    public void setContent() { this.content = content; }
-    public void setTags() { this.tags = tags; }
-    public void setLikes() { this.likes = likes; }
-    public void setTimestamp() { this.timestamp = timestamp; }
+    public void setID(Long id) { this.id = id; }
+    public void setUsername(String username) { this.username = username; }
+    public void setPostType(String postType) { this.postType = postType; }
+    public void setContent(String content) { this.content = content; }
+    public void setTags(String tags) { this.tags = tags; }
+    public void setLikes(Integer likes) { this.likes = likes; }
+    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
 
 }
