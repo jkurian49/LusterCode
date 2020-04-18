@@ -1,8 +1,11 @@
 package edu.cooper.ee.ece366.LusterCode;
 
+import edu.cooper.ee.ece366.LusterCode.handler.PostHandler;
 import edu.cooper.ee.ece366.LusterCode.service.AnswerService;
+import edu.cooper.ee.ece366.LusterCode.service.PostService;
 import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
+import edu.cooper.ee.ece366.LusterCode.store.PostStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
 import com.google.gson.Gson;
 import org.jdbi.v3.core.Jdbi;
@@ -16,10 +19,17 @@ public class Main {
         String username = "main";
         String password = "Lusterman";
         Jdbi jdbi = Jdbi.create(url, username, password);
+
+        PostStoreJdbi postStore = new PostStoreJdbi(jdbi);
+        postStore.populateDb();
+        PostService postService = new PostService(postStore);
+        PostHandler postHandler = new PostHandler(postService, gson);
+
         AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
         answerStore.populateDb();
         AnswerService answerService = new AnswerService(answerStore);
         AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
+
         JsonTransformer jsonTransformer = new JsonTransformer();
 
         Spark.exception(Exception.class, (exception, request, response) -> {
@@ -40,6 +50,9 @@ public class Main {
         Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
         Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 //
+
+        Spark.post("/post", postHandler::createPost, gson::toJson);
+        Spark.get("/post/:postID", postHandler::returnPost, gson::toJson);
 
 
        /* PostStore postStore = new PostStoreImpl();

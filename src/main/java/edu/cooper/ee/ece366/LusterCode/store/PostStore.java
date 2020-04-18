@@ -6,11 +6,11 @@ public interface PostStore {
 
     Post createPost(Post post);
 
-    Post editPost(Long postID, Post post);
+//    Post editPost(Long postID, Post post);
 
-    Post returnPost(Long postID);
+//    Post returnPost(Long postID);
 
-    String likePost(Long postID);
+//    String likePost(Long postID);
 
-    String deletePost(Long postID);
+//    String deletePost(Long postID);
 }
