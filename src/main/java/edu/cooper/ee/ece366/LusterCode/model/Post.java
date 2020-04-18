@@ -1,42 +1,68 @@
 package edu.cooper.ee.ece366.LusterCode.model;
 
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import com.google.gson.annotations.Expose;
+import java.time.LocalDateTime;
 
 public class Post {
+
     // Instance Variables
-    private final String type; //coding problem or post/question
-    private final String author; //UserClass.id
+    @Expose private Long id;
+    @Expose private String username;
+    @Expose private String postType;
+    @Expose private String content;
+    @Expose private String tags;
+    @Expose private Integer likes; // eventually this will include list of users (like might be its own class)
+    @Expose private LocalDateTime timestamp;
 
-    private String post;    //body of text containing the post
-    private String tags[];  //each string is a tag
-
-    static final AtomicLong NEXT_ID = new AtomicLong(0);
-    final long id = NEXT_ID.getAndIncrement();
-    private final Timestamp timestamp;
-    private Map<Integer, String> likes = new HashMap<Integer, String>();
-
-    public Post(String type, String author, String post, String tags[]){
-        this.type = type;
-        this.author = author;
-        this.post = post;
+    //for retrieving object from database
+    public Post(Long id, String username, String postType, String content,
+                  String tags, Integer likes, LocalDateTime timestamp){
+        this.id = -1L;
+        this.username = username;
+        this.postType = postType;
+        this.content = content;
         this.tags = tags;
-
-        timestamp = new Timestamp(System.currentTimeMillis());
-        //   likes = new Map<Integer, String>();
-
+        this.likes = likes;
+        this.timestamp = timestamp;
     }
 
-    public Long getId() { return id; }
-    public String getType() { return type; }
-    public String getAuthor() { return author; }
-    public String[] getTags() { return tags; }
-    public Timestamp getTime() { return timestamp; }
+    //for creating object to be stored in database, which creates its own ID
+    public Post(String username, String postType, String content,
+                String tags, Integer likes, LocalDateTime timestamp){
+        this.id = id;
+        this.username = username;
+        this.postType = postType;
+        this.content = content;
+        this.tags = tags;
+        this.likes = likes;
+        this.timestamp = timestamp;
+    }
 
-    public void setTags(String[] tags) {this.tags = tags;}
+    //blank post, just because
+    public Post(){
+        this.id = -1L;
+        this.username = null;
+        this.postType = null;
+        this.content = null;
+        this.tags = null;
+        this.likes = 0;
+        this.timestamp = LocalDateTime.now();
+    }
 
-    public String getBody() {return post;}
+    public Long getID() { return id; }
+    public String getUsername() { return username; }
+    public String getPostType() { return postType; }
+    public String getContent() { return content; }
+    public String getTags() { return tags; }
+    public Integer getLikes() { return likes; }
+    public LocalDateTime getTimestamp() { return timestamp; }
+
+    public void setID() { this.id = id; }
+    public void setUsername() { this.username = username; }
+    public void setPostType() { this.postType = postType; }
+    public void setContent() { this.content = content; }
+    public void setTags() { this.tags = tags; }
+    public void setLikes() { this.likes = likes; }
+    public void setTimestamp() { this.timestamp = timestamp; }
 
 }
