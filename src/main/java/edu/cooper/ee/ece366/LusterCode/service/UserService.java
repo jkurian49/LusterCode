@@ -12,9 +12,7 @@ public class UserService {
     }
 
     public User createUser(String name, String pass, String firstName, String lastName, String email) {
-        System.out.println("test3");
         userStore.newUser(name, pass, firstName, lastName, email);
-        System.out.println("test5");
         return userStore.returnUser(name);
     }
 

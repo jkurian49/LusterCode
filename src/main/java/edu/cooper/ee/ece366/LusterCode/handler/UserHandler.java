@@ -16,9 +16,8 @@ public class UserHandler {
 
     //Handler for user creation
     public User userMake(Request req) {
-        System.out.println("test2");
         String name = req.params(":username");
-        String pass = req.params(":pass");
+        String pass = req.params(":password");
         String firstName = req.params(":first");
         String lastName = req.params(":last");
         String email = req.params(":email");
@@ -28,23 +27,25 @@ public class UserHandler {
 
     //Handler for user deletion
     public User userRemover(Request req) {
-        String pass = req.params(":field2");
-        String name = req.params(":field1");
+        String name = req.params(":username");
+        String pass = req.params(":password");
 
         return userService.removeUser(name, pass);
     }
 
     //Handler for password modification
     public String passChange(Request req) {
-        String oldPass = req.params(":field2");
-        String newPass = req.params(":field3");
-        String name = req.params(":field1");
+        String oldPass = req.params(":password");
+        String newPass = req.params(":newpassword");
+        String name = req.params(":username");
 
         return userService.changePassword(name, oldPass, newPass);
     }
 
     //Check if user in database
-    public boolean isUser(String name) {
+    public boolean isUser(Request req) {
+        String name = req.params(":username");
         return userService.isUser(name);
     }
+
 }

@@ -1,5 +1,6 @@
 package edu.cooper.ee.ece366.LusterCode;
 import edu.cooper.ee.ece366.LusterCode.handler.UserHandler;
+import edu.cooper.ee.ece366.LusterCode.model.User;
 import edu.cooper.ee.ece366.LusterCode.store.UserStore;
 import edu.cooper.ee.ece366.LusterCode.store.UserStoreImpl;
 import edu.cooper.ee.ece366.LusterCode.service.UserService;
@@ -45,21 +46,52 @@ public class Main {
 //            exception.printStackTrace();
 //        });
 //
+
+
+        //USER STUFF *************************************************************************
+
         UserStoreImpl userStore = new UserStoreImpl();
         UserService userService = new UserService(userStore);
         UserHandler userHandler = new UserHandler(userService);
 
-        //Determine what to do with 5-field string
-        get("/:action/:username/:pass/:first/:last/:email", (req,res)-> {
-            System.out.println("test1");
+        //Determine what to do with 6-field string
+        get("/:action/:username/:password/:first/:last/:email", (req,res)-> {
             String action = req.params(":action");
-            userHandler.userMake(req);
-            System.out.println("test2");
+            User user = userHandler.userMake(req);
+            System.out.println(user.userName);
 
-            return "Hello: Nothing Happened" + "\n"; //None of the conditions were met, and so nothing was done
+            return "User " + user.userName + " created\n";
         });
 
+
+        //Determine what to do with 4-field string
+        get("/:action/:username/:password", (req,res)-> {
+            String action = req.params(":action");
+            User user = userHandler.userRemover(req);
+            System.out.println(user.userName);
+
+            return "User " + user.userName + " removed\n";
+        });
+
+
+        //Determine what to do with 5-field string
+        get("/:action/:username/:password/:newpassword", (req,res)-> {
+            String action = req.params(":action");
+            String newpass = userHandler.passChange(req);
+
+            return "User password changed to " + newpass + "\n";
+        });
+
+        //Determine what to do with 5-field string
+        get("/:action/:username/", (req,res)-> {
+            boolean answer = userHandler.isUser(req);
+            return "User present? " + answer + "\n";
+        });
+
+
         get("/ping", (req, res) -> "OK\n");
+
+        //USER STUFF END *********************************************************************
 
 
 
