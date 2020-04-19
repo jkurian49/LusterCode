@@ -14,7 +14,7 @@ public class AnswerStoreJdbi implements AnswerStore{
     public void populateDb() {
         jdbi.useHandle(
                 handle ->{
-                        handle.execute("CREATE TABLE IF NOT EXISTS answers (id bigint auto_increment, username varchar(255), askPostID bigint, answerType varchar(255), content varchar(255), timestamp datetime, primary key(id));");
+                        handle.execute("CREATE TABLE IF NOT EXISTS answers (id bigint auto_increment, username varchar(255), askPostID bigint, answerType varchar(255), content mediumtext, timestamp datetime, primary key(id));");
                 });
     }
     @Override
