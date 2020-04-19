@@ -23,13 +23,20 @@ async function newPost() {
             likes: 0})
     });
     const content = await response.json();
-    console.log(content.message);
+    console.log(content);
 }
 
 
-function displayMyPostsTable() {
-    if (document.getElementById("mypoststable").style.visibility === "none")
-        document.getElementById("mypoststable").style.visibility="visible";
-    else
-        document.getElementById("mypoststable").style.visibility="none";
+async function displayAnswers() {
+    fetch('http://localhost:4567/answers/1').then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
 }
+

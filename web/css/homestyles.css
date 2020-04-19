@@ -79,9 +79,3 @@ h1 {
 .form-container .btn:hover, .open-button:hover {
     opacity: 1;
 }
-
-.mypoststable {
-    visibility: hidden;
-    width: 100%;
-    border:red;
-}
