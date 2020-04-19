@@ -1,7 +1,7 @@
 package edu.cooper.ee.ece366.LusterCode.store;
 
-import edu.cooper.ee.ece366.LusterCode.model.Answer;
-import edu.cooper.ee.ece366.LusterCode.model.Post;
+//import edu.cooper.ee.ece366.LusterCode.model.Answer;
+//import edu.cooper.ee.ece366.LusterCode.model.Post;
 import edu.cooper.ee.ece366.LusterCode.model.User;
 
 import java.util.HashMap;
@@ -23,6 +23,7 @@ public class UserStoreImpl implements UserStore {
 
     @Override
     public void newUser(String name, String pass, String firstName, String lastName, String email) {
+        System.out.println("test4");
         User newU = new User(name, pass, firstName, lastName, email);
         UserList.put(name, newU);
     }

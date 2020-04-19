@@ -1,17 +1,20 @@
 package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.User;
-import edu.cooper.ee.ece366.LusterCode.store.UserStore;;
+import edu.cooper.ee.ece366.LusterCode.store.UserStore;
+import edu.cooper.ee.ece366.LusterCode.store.UserStoreImpl;
 
 public class UserService {
 
-    private static UserStore userStore;
+    private final UserStore userStore;
 
-    public UserService(UserStore userStore) {
+    public UserService(UserStoreImpl userStore) {
         this.userStore = userStore;
     }
 
-    public static User createUser(String name, String pass, String firstName, String lastName, String email) {
+    public User createUser(String name, String pass, String firstName, String lastName, String email) {
+        System.out.println("test3");
         userStore.newUser(name, pass, firstName, lastName, email);
+        System.out.println("test5");
         return userStore.returnUser(name);
     }
 
