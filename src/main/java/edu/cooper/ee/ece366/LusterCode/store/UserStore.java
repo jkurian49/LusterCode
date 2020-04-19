@@ -5,13 +5,17 @@ import spark.ResponseTransformer;
 
 public interface UserStore {
 
-    void newUser(String name, String pass, String firstName, String lastName, String email);
+    User addUser(User user);
 
-    void removeUser(String name);
+    User getUser(String username);
 
-    void modifyPassword(String name, String password);
+    Integer deleteUser(String username);
 
-    boolean isUser(String name);
-
-    User returnUser(String name);
+//    void removeUser(String name);
+//
+//    void modifyPassword(String name, String password);
+//
+//    boolean isUser(String name);
+//
+//    User returnUser(String name);
 }

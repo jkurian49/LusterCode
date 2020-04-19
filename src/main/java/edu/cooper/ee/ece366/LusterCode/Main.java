@@ -1,83 +1,83 @@
 package edu.cooper.ee.ece366.LusterCode;
 import edu.cooper.ee.ece366.LusterCode.handler.UserHandler;
+import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.store.UserStore;
-import edu.cooper.ee.ece366.LusterCode.store.UserStoreImpl;
 import edu.cooper.ee.ece366.LusterCode.service.UserService;
 
-//import edu.cooper.ee.ece366.LusterCode.handler.PostHandler;
-//import edu.cooper.ee.ece366.LusterCode.service.AnswerService;
-//import edu.cooper.ee.ece366.LusterCode.service.PostService;
-//import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
-//import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
-//import edu.cooper.ee.ece366.LusterCode.store.PostStoreJdbi;
+import edu.cooper.ee.ece366.LusterCode.handler.PostHandler;
+import edu.cooper.ee.ece366.LusterCode.service.AnswerService;
+import edu.cooper.ee.ece366.LusterCode.service.PostService;
+import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
+import edu.cooper.ee.ece366.LusterCode.store.PostStoreJdbi;
 
 
+import edu.cooper.ee.ece366.LusterCode.store.UserStoreJdbi;
 import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
-//import com.google.gson.Gson;
-//import org.jdbi.v3.core.Jdbi;
+import com.google.gson.Gson;
+import org.jdbi.v3.core.Jdbi;
 import spark.Spark;
-import edu.cooper.ee.ece366.LusterCode.handler.UserHandler;
 
 import static spark.Spark.get;
 
 public class Main {
     public static void main(String[] args) {
 
-//        Gson gson = new Gson();
-//        String url = "jdbc:mysql://localhost:3306/LusterCode?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
-//        String username = "main";
-//        String password = "Lusterman";
-//        Jdbi jdbi = Jdbi.create(url, username, password);
-//
-//        PostStoreJdbi postStore = new PostStoreJdbi(jdbi);
-//        postStore.populateDb();
-//        PostService postService = new PostService(postStore);
-//        PostHandler postHandler = new PostHandler(postService, gson);
-//
-//        AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
-//        answerStore.populateDb();
-//        AnswerService answerService = new AnswerService(answerStore);
-//        AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
-//
-//        JsonTransformer jsonTransformer = new JsonTransformer();
-//
-//        Spark.exception(Exception.class, (exception, request, response) -> {
-//            exception.printStackTrace();
-//        });
-//
-        UserStore userStore = new UserStoreImpl();
+        Gson gson = new Gson();
+        String url = "jdbc:mysql://localhost:3306/LusterCode?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=EST";
+        String username = "main";
+        String password = "Lusterman";
+        Jdbi jdbi = Jdbi.create(url, username, password);
+
+        UserStoreJdbi userStore = new UserStoreJdbi(jdbi);
+        userStore.populateDb();
         UserService userService = new UserService(userStore);
-        UserHandler userHandler = new UserHandler(userService);
+        UserHandler userHandler = new UserHandler(userService, gson);
+
+        PostStoreJdbi postStore = new PostStoreJdbi(jdbi);
+        postStore.populateDb();
+        PostService postService = new PostService(postStore);
+        PostHandler postHandler = new PostHandler(postService, gson);
+
+        AnswerStoreJdbi answerStore = new AnswerStoreJdbi(jdbi);
+        answerStore.populateDb();
+        AnswerService answerService = new AnswerService(answerStore);
+        AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
+
+        JsonTransformer jsonTransformer = new JsonTransformer();
+
+        Spark.exception(Exception.class, (exception, request, response) -> {
+            exception.printStackTrace();
+        });
+
+//        UserStore userStore = new UserStoreImpl();
+//        UserService userService = new UserService(userStore);
+//        UserHandler userHandler = new UserHandler(userService);
 
         //Determine what to do with 5-field string
-        get("/:action/:username/:pass/:first/:last/:email", (req,res)-> {
-            System.out.println("test1");
-            String action = req.params(":action");
-            userHandler.userMake(req);
-            System.out.println("test2");
-
-            return "Hello: Nothing Happened" + "\n"; //None of the conditions were met, and so nothing was done
-        });
+//        get("/:action/:username/:pass/:first/:last/:email", (req,res)-> {
+//            System.out.println("test1");
+//            String action = req.params(":action");
+//            userHandler.userMake(req);
+//            System.out.println("test2");
+//
+//            return "Hello: Nothing Happened" + "\n"; //None of the conditions were met, and so nothing was done
+//        });
 
         get("/ping", (req, res) -> "OK\n");
 
-
-
         // user routing
-        // Spark.post("/user", (req, res) -> userHandler.createUser(req), jsonTransformer);
-        // Spark.get("/user/:userID", (req, res) -> userHandler.getUser(req), jsonTransformer);
+        Spark.post("/user", userHandler::createUser, jsonTransformer);
+        Spark.get("/user/:username", userHandler::getUser, jsonTransformer);
+        Spark.delete("/user/:username", userHandler::deleteUser, jsonTransformer);
         // post routing
-        // Spark.post("/post", (req, res) -> postHandler.createPost(req), jsonTransformer);
-        // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req), jsonTransformer);
+        Spark.post("/post", postHandler::createPost, jsonTransformer);
+        // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req, res), jsonTransformer);
         // answer routing
-//        Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
-//        Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
-//        Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
-//        Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
-////
-//
-//        Spark.post("/post", postHandler::createPost, gson::toJson);
-//        Spark.get("/post/:postID", postHandler::returnPost, gson::toJson);
+        Spark.post("/answer", answerHandler::createAnswer, gson::toJson);
+        Spark.get("/answer/:answerID", answerHandler::getAnswer, gson::toJson);
+        Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
+        Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
+
 
 
        /* PostStore postStore = new PostStoreImpl();
