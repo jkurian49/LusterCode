@@ -8,20 +8,20 @@ import com.google.gson.Gson;
 public class UserHandler {
 // ###################### Creating/removing/modifying USERS ###################### //
     private final UserService userService;
-    private final Gson gson;
 
-    public UserHandler(UserService userService, Gson gson) {
+
+    public UserHandler(UserService userService) {
         this.userService = userService;
-        this.gson = gson;
     }
 
     //Handler for user creation
     public User userMake(Request req) {
-        String name = req.params(":field1");
-        String pass = req.params(":field2");
-        String firstName = req.params(":field2");
-        String lastName = req.params(":field1");
-        String email = req.params(":field2");
+        System.out.println("test2");
+        String name = req.params(":username");
+        String pass = req.params(":pass");
+        String firstName = req.params(":first");
+        String lastName = req.params(":last");
+        String email = req.params(":email");
 
         return userService.createUser(name, pass, firstName, lastName, email);
     }
