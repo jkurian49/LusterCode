@@ -1,7 +1,7 @@
 package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.User;
 import edu.cooper.ee.ece366.LusterCode.store.UserStore;
-import edu.cooper.ee.ece366.LusterCode.store.UserStoreImpl;;
+import edu.cooper.ee.ece366.LusterCode.store.UserStoreImpl;
 
 public class UserService {
 
