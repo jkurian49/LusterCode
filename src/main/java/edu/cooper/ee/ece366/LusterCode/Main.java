@@ -1,17 +1,7 @@
 package edu.cooper.ee.ece366.LusterCode;
-import edu.cooper.ee.ece366.LusterCode.handler.UserHandler;
-import edu.cooper.ee.ece366.LusterCode.store.AnswerStoreJdbi;
-import edu.cooper.ee.ece366.LusterCode.store.UserStore;
-import edu.cooper.ee.ece366.LusterCode.service.UserService;
-
-import edu.cooper.ee.ece366.LusterCode.handler.PostHandler;
-import edu.cooper.ee.ece366.LusterCode.service.AnswerService;
-import edu.cooper.ee.ece366.LusterCode.service.PostService;
-import edu.cooper.ee.ece366.LusterCode.handler.AnswerHandler;
-import edu.cooper.ee.ece366.LusterCode.store.PostStoreJdbi;
-
-
-import edu.cooper.ee.ece366.LusterCode.store.UserStoreJdbi;
+import edu.cooper.ee.ece366.LusterCode.handler.*;
+import edu.cooper.ee.ece366.LusterCode.store.*;
+import edu.cooper.ee.ece366.LusterCode.service.*;
 import edu.cooper.ee.ece366.LusterCode.util.JsonTransformer;
 import com.google.gson.Gson;
 import org.jdbi.v3.core.Jdbi;
@@ -48,20 +38,6 @@ public class Main {
         Spark.exception(Exception.class, (exception, request, response) -> {
             exception.printStackTrace();
         });
-
-//        UserStore userStore = new UserStoreImpl();
-//        UserService userService = new UserService(userStore);
-//        UserHandler userHandler = new UserHandler(userService);
-
-        //Determine what to do with 5-field string
-//        get("/:action/:username/:pass/:first/:last/:email", (req,res)-> {
-//            System.out.println("test1");
-//            String action = req.params(":action");
-//            userHandler.userMake(req);
-//            System.out.println("test2");
-//
-//            return "Hello: Nothing Happened" + "\n"; //None of the conditions were met, and so nothing was done
-//        });
 
         get("/ping", (req, res) -> "OK\n");
 
