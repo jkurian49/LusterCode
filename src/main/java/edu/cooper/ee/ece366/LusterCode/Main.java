@@ -47,6 +47,7 @@ public class Main {
         Spark.delete("/user/:username", userHandler::deleteUser, jsonTransformer);
         // post routing
         Spark.post("/post", postHandler::createPost, jsonTransformer);
+        Spark.get("/post/:username", postHandler::getUserPosts, jsonTransformer);
         // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req, res), jsonTransformer);
         // answer routing
         Spark.post("/answer", answerHandler::createAnswer, gson::toJson);

@@ -24,6 +24,11 @@ public class PostHandler {
         return postService.createPost(post);
     }
 
+    public List<Post> getUserPosts(final Request req, final Response res) {
+        String username = req.params(":username");
+        return postService.getUserPosts(username);
+    }
+
 /*
     public Post editPost(final Request req, final Response res) {
         Long postID = Long.valueOf(req.params(":postID"));
