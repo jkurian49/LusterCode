@@ -1,6 +1,9 @@
 package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.User;
-import edu.cooper.ee.ece366.LusterCode.store.UserStore;;
+import edu.cooper.ee.ece366.LusterCode.store.UserStore;
+import spark.Request;
+import com.google.gson.Gson;
+import spark.Response;
 
 public class UserService {
 
@@ -18,12 +21,26 @@ public class UserService {
         return userStore.getUser(username);
     }
 
+    public User login(final String username, final String password, Request request, Response response) {
+        if (userStore.getUser(username).getPassword().equals(password)) {
+            System.out.print("Login Successful\n");
+
+            response.cookie("foo", "bar"); //Set cookie for future requests
+            System.out.print(request.cookies()); //Retrieve cookie from request
+
+        }
+
+        return userStore.getUser(username);
+    }
+
     public String deleteUser(final String username) {
 
         Integer deletion = userStore.deleteUser(username);
         if (deletion == 1) {return "DELETION SUCCESSFUL"; }
         else {return "ERROR DELETING FROM DATABASE"; }
     }
+
+
 
 //    public static User createUser(String name, String pass, String firstName, String lastName, String email) {
 //        userStore.newUser(name, pass, firstName, lastName, email);

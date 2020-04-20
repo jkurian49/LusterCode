@@ -11,6 +11,8 @@ public interface UserStore {
 
     Integer deleteUser(String username);
 
+  //  User login(String username);
+
 //    void removeUser(String name);
 //
 //    void modifyPassword(String name, String password);
