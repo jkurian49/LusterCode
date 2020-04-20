@@ -51,9 +51,28 @@ public class PostStoreJdbi implements PostStore{
                                 .list());
     }
 
+    @Override
+    public Post returnPost(Long postID){
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("SELECT id, username, postType, content, tags, likes, timestamp FROM posts WHERE id = :id")
+                                .bind("id", postID)
+                                .mapToBean(Post.class)
+                                .one());
+    }
 
-//    @Override
-//    public Post editPost(Long postID, Post post);
+    @Override
+    public Integer deletePost(final Long postID) {
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("DELETE FROM posts WHERE id = :id")
+                                .bind("id", postID)
+                                .mapToBean(Integer.class)
+                                .one());
+
+    }
 
 }
 

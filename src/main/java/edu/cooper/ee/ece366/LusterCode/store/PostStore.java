@@ -9,11 +9,11 @@ public interface PostStore {
 
     List<Post> getUserPosts(String username);
 
-//    Post editPost(Long postID, Post post);
+    Post returnPost(Long postID);
 
-//    Post returnPost(Long postID);
+//    Post editPost(Long postID, Post post);
 
 //    String likePost(Long postID);
 
-//    String deletePost(Long postID);
+    Integer deletePost(Long postID);
 }

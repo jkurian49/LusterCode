@@ -29,6 +29,22 @@ public class PostHandler {
         return postService.getUserPosts(username);
     }
 
+    public Post returnPost(final Request req, final Response res) {
+        Long postID = Long.valueOf(req.params(":postID"));
+        return postService.returnPost(postID);
+    }
+
+//    public String likePost(final Request req, final Response res) {
+//        Long postID = Long.valueOf(req.params(":postID"));
+//        return postService.likePost(postID);
+//    }
+
+    public String deletePost(final Request req, final Response res) {
+        Long postID = Long.valueOf(req.params(":postID"));
+        return postService.deletePost(postID);
+    }
+
+
 /*
     public Post editPost(final Request req, final Response res) {
         Long postID = Long.valueOf(req.params(":postID"));
@@ -41,19 +57,5 @@ public class PostHandler {
 //        return postService.addTags(postID);
 //    }
 
-    public Post returnPost(final Request req, final Response res) {
-        Long postID = Long.valueOf(req.params(":postID"));
-        return postService.returnPost(postID);
-    }
-
-    public String likePost(final Request req, final Response res) {
-        Long postID = Long.valueOf(req.params(":postID"));
-        return postService.likePost(postID);
-    }
-
-    public String deletePost(final Request req, final Response res) {
-        Long postID = Long.valueOf(req.params(":postID"));
-        return postService.deletePost(postID);
-    }
 */
 }

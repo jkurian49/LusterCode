@@ -53,6 +53,10 @@ public class Main {
         // post routing
         Spark.post("/post", postHandler::createPost, jsonTransformer);
         Spark.get("/posts/:username", postHandler::getUserPosts, jsonTransformer);
+        Spark.get("/post/:postID", postHandler::returnPost, jsonTransformer);
+        //Spark.get("/post/like/:postID", postHandler::likePost, jsonTransformer)
+        Spark.delete("/post/:postID", postHandler::deletePost, jsonTransformer);
+
         // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req, res), jsonTransformer);
         // answer routing
         Spark.post("/answer", answerHandler::createAnswer, gson::toJson);

@@ -16,14 +16,19 @@ public class PostService {
 
     public List<Post> getUserPosts(String username) { return postStore.getUserPosts(username); }
 
-//  public Post addTags(Post post) { }
-
-/*    public Post editPost(Long postID, Post post) { return postStore.editPost(postID, post); }
-
     public Post returnPost(Long postID) { return postStore.returnPost(postID); }
 
-    public String likePost(Long postID) { return postStore.likePost(postID); }
+//    public String likePost(Long postID) { return postStore.likePost(postID); }
 
-    public String deletePost(Long postID) { return postStore.deletePost(postID); }*/
+    public String deletePost(Long postID) {
+        Integer deletion = postStore.deletePost(postID);
+        if (deletion == 1) {return "DELETION SUCCESSFUL"; }
+        else {return "ERROR DELETING FROM DATABASE"; }}
+
+
+//  public Post addTags(Post post) { }
+
+//    public Post editPost(Long postID, Post post) { return postStore.editPost(postID, post); }
+
 
 }
