@@ -3,6 +3,7 @@ package edu.cooper.ee.ece366.LusterCode.service;
 import edu.cooper.ee.ece366.LusterCode.model.Post;
 import edu.cooper.ee.ece366.LusterCode.store.AnswerStore;
 import edu.cooper.ee.ece366.LusterCode.store.PostStore;
+import java.util.List;
 
 public class PostService {
 
@@ -12,6 +13,8 @@ public class PostService {
     }
 
     public Post createPost(Post post) { return postStore.createPost(post);}
+
+    public List<Post> getUserPosts(String username) { return postStore.getUserPosts(username); }
 
 //  public Post addTags(Post post) { }
 

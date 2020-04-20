@@ -1,7 +1,10 @@
 package edu.cooper.ee.ece366.LusterCode.store;
 
+import edu.cooper.ee.ece366.LusterCode.model.Answer;
 import edu.cooper.ee.ece366.LusterCode.model.Post;
 import org.jdbi.v3.core.Jdbi;
+
+import java.util.List;
 
 public class PostStoreJdbi implements PostStore{
 
@@ -36,6 +39,18 @@ public class PostStoreJdbi implements PostStore{
         post.setID(id);
         return post;
     }
+
+    @Override
+    public List<Post> getUserPosts(String username){
+        return jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("SELECT id, username, postType, content, tags, likes, timestamp FROM posts WHERE username = :username")
+                                .bind("username", username)
+                                .mapToBean(Post.class)
+                                .list());
+    }
+
 
 //    @Override
 //    public Post editPost(Long postID, Post post);
