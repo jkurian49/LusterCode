@@ -44,7 +44,12 @@ public class Main {
         // user routing
         Spark.post("/user", userHandler::createUser, jsonTransformer);
         Spark.get("/user/:username", userHandler::getUser, jsonTransformer);
+
+        Spark.get("/user/:username/:password", userHandler::login, jsonTransformer);
+
+
         Spark.delete("/user/:username", userHandler::deleteUser, jsonTransformer);
+
         // post routing
         Spark.post("/post", postHandler::createPost, jsonTransformer);
         // Spark.get("/post/:postID", (req, res) -> postHandler.getPost(req, res), jsonTransformer);

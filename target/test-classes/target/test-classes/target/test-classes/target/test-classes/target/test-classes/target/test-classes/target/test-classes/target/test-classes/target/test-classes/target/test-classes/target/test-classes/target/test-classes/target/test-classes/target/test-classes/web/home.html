@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/homestyles.css">
+    <script src ="js/home.js"></script>
+    <title>LusterCode</title>
+</head>
+<body>
+    <h1>LusterCode</h1>
+    <div class = homenav>
+
+        <button class="open-button" id = "postbtn" onclick="openPostForm()">Ask a Question</button>
+        <button class="open-button" id = viewpostsbtn" onclick="displayAnswers()">View Your Posts</button>
+    </div>
+    <div class="form-popup" id="myForm">
+        <form id ="newpost" class="form-container">
+
+            <label for="body"><b>Ask your question:</b></label>
+            <textarea id = "body" name="body"></textarea>
+
+            <button type="submit" onclick="newPost()" class="btn">Submit</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+
+</body>
+</html>

@@ -48,6 +48,7 @@ public class UserStoreJdbi implements UserStore{
                                 .one());
     }
 
+
     @Override
     public Integer deleteUser(final String username) {
         return jdbi.withHandle(

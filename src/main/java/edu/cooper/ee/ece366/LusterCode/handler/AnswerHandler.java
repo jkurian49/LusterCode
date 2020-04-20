@@ -19,6 +19,7 @@ public class AnswerHandler {
 
     public Answer createAnswer(final Request req, final Response res) {
         Answer answer = gson.fromJson(req.body(), Answer.class);
+        System.out.print(req.session().attributes());
         return answerService.createAnswer(answer);
     }
 
