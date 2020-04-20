@@ -34,8 +34,29 @@ async function newPost() {
     });
 }
 
-async function displayAnswers() {
-    fetch('http://localhost:4567/answers/1').then(function (response) {
+function displayMyPosts() {
+    var posts = getMyPosts("Jason");
+}
+
+async function getMyPosts(username) {
+    fetch('http://localhost:4567/answers/'+username).then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
+
+function displayAnswers() {
+    getAnswers("1");
+}
+
+async function getAnswers(askpostID) {
+    fetch('http://localhost:4567/answers/'+askpostID ).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
