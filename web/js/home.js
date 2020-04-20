@@ -39,7 +39,7 @@ function displayMyPosts() {
 }
 
 async function getMyPosts(username) {
-    fetch('http://localhost:4567/answers/'+username).then(function (response) {
+    fetch('http://localhost:4567/posts/'+username).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
