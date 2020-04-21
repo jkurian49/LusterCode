@@ -34,6 +34,11 @@ public class Main {
         AnswerService answerService = new AnswerService(answerStore);
         AnswerHandler answerHandler = new AnswerHandler(answerService, gson);
 
+        MockInterviewStoreJdbi mockInterviewStoreJdbi = new MockInterviewStoreJdbi(jdbi);
+        mockInterviewStoreJdbi.populateDb();
+        MockInterviewService mockInterviewService = new MockInterviewService(mockInterviewStoreJdbi);
+        MockInterviewHandler mockInterviewHandler = new MockInterviewHandler(mockInterviewService, gson);
+
         JsonTransformer jsonTransformer = new JsonTransformer();
 
         Spark.exception(Exception.class, (exception, request, response) -> {
@@ -65,7 +70,7 @@ public class Main {
         Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 
         //Mock Interview routing
-        //Spark.post("/mockinterview", mockInterviewHandler::createMockInterview, gson::toJson);
+        Spark.post("/mockinterview", mockInterviewHandler::createMockInterview, gson::toJson);
 
         options("/*", (request,response)->{
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
