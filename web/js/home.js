@@ -125,8 +125,34 @@ function displayAnswers() {
     getAnswers("1");
 }
 
-async function getAnswers(askpostID) {
-    fetch('http://localhost:4567/answers/'+askpostID ).then(function (response) {
+async function getPost(askpostID) {
+    fetch('http://localhost:4567/post/'+askpostID ).then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
+
+async function getAnswer(answerID) {
+    fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}
+
+async function getMockInterviews(mockintid) {
+    fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
