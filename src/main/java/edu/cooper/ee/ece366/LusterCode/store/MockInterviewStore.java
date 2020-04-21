@@ -1,4 +1,10 @@
 package edu.cooper.ee.ece366.LusterCode.store;
 
-public class MockInterviewStore {
+import edu.cooper.ee.ece366.LusterCode.model.Answer;
+import edu.cooper.ee.ece366.LusterCode.model.MockInterview;
+
+public interface MockInterviewStore {
+
+    MockInterview addMockInterview(MockInterview mockInterview);
+
 }
