@@ -51,3 +51,25 @@ async function newSignup() {
         console.warn('Something went wrong.', err);
     });
 }
+
+
+async function login() {
+    var form = document.getElementById("loginform");
+    var username = form.elements.username.value;
+    var password = form.elements.password.value;
+
+    fetch('http://localhost:4567/users/'+username+"/"+password).then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        // This is the JSON from our response
+        console.log(data);
+        var parsed = JSON.parse(data);
+        if (parsed.login === "success"){
+            window.location.href = "www.google.com";
+        }
+    }).catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
+}

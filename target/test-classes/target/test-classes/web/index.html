@@ -26,10 +26,16 @@
         </div>
 
         <div class="buttons">
-            <button type="submit" onclick="login()" class="btn">Submit</button>
-            <button type="button" class="btn cancel" onclick="closeLoginForm()">Close</button>
+            <button type='button'  onclick="login()">Submit</button>
+            <button type='button' onclick="closeLoginForm()">Close</button>
         </div>
 
+    </form>
+</div>
+
+<div class="confirm-popup" id="cform">
+    <form id ="confirmform" class="form-container">
+        <p>Account Created | Thanks for signing up!</p>
     </form>
 </div>
 
@@ -37,16 +43,16 @@
     <form id ="signupform" class="form-container">
 
         <div class="textboxes">
-            <input type="text" placeholder="First Name" name="firstName" class="textbox" id="first" required>
-            <input type="text" placeholder="Last Name" name="lastName" class="textbox" id="last" required>
-            <input type="text" placeholder="Username" name="username" class="textbox" id="user" required>
-            <input type="text" placeholder="Password" name="password" class="textbox" id="pass" required>
+            <input type="text" placeholder="First Name" name="first" class="textbox" id="first" required>
+            <input type="text" placeholder="Last Name" name="last" class="textbox" id="last" required>
+            <input type="text" placeholder="Username" name="user" class="textbox" id="user" required>
+            <input type="text" placeholder="Password" name="pass" class="textbox" id="pass" required>
             <input type="text" placeholder="Email" name="email" class="textbox" id="email" required>
         </div>
 
         <div class="buttons">
-            <button type="submit" onclick="newSignup()" class="btn">Submit</button>
-            <button type="button" class="btn cancel" onclick="closeSignupForm()">Close</button>
+            <button type='button' onclick="newSignup()">Submit</button>
+            <button type='button' onclick="closeSignupForm()">Close</button>
         </div>
 
     </form>
@@ -54,3 +60,4 @@
 
 </body>
 </html>
+

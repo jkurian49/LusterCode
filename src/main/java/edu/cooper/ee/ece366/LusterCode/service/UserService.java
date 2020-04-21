@@ -4,10 +4,14 @@ import edu.cooper.ee.ece366.LusterCode.store.UserStore;
 import spark.Request;
 import com.google.gson.Gson;
 import spark.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserService {
 
     private final UserStore userStore;
+
+    Map<String, String> cookieJar = new HashMap<>();
 
     public UserService(UserStore userStore) {
         this.userStore = userStore;
@@ -23,13 +27,17 @@ public class UserService {
 
     public User login(final String username, final String password, Request request, Response response) {
         if (userStore.getUser(username).getPassword().equals(password)) {
-            System.out.print("Login Successful\n");
-
-            response.cookie("foo", "bar"); //Set cookie for future requests
-            System.out.print(request.cookies()); //Retrieve cookie from request
-
+            System.out.print("login successful\n");
+            String cookieVal = "cookieVal";
+            response.cookie("thisapp", cookieVal); //Set cookie for future requests
+            cookieJar.put(cookieVal, username);
+            //Reply with Success
+            response.header("login", "success");
+        } else {
+            System.out.print("login failed\n");
+            response.header("login", "fail");
+            //Reply with Fail
         }
-
         return userStore.getUser(username);
     }
 
