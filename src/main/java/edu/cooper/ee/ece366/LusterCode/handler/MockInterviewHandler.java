@@ -1,5 +1,6 @@
 package edu.cooper.ee.ece366.LusterCode.handler;
 
+import edu.cooper.ee.ece366.LusterCode.model.Answer;
 import spark.Request;
 import spark.Response;
 import com.google.gson.Gson;
@@ -20,5 +21,10 @@ public class MockInterviewHandler {
     public MockInterview createMockInterview(final Request req, final Response res) {
         MockInterview mockInterview = gson.fromJson(req.body(), MockInterview.class);
         return mockInterviewService.createMockInterview(mockInterview);
+    }
+
+    public MockInterview getMockInterview(final Request req, final Response res) {
+        Long mockintID = Long.valueOf(req.params(":mockintID"));
+        return mockInterviewService.getMockInterview(mockintID);
     }
 }

@@ -1,5 +1,6 @@
 package edu.cooper.ee.ece366.LusterCode.service;
 
+import edu.cooper.ee.ece366.LusterCode.model.Answer;
 import edu.cooper.ee.ece366.LusterCode.model.MockInterview;
 import edu.cooper.ee.ece366.LusterCode.store.MockInterviewStore;
 
@@ -12,5 +13,8 @@ public class MockInterviewService {
 
     public MockInterview createMockInterview(final MockInterview mockInterview){
         return mockInterviewStore.addMockInterview(mockInterview);
+    }
+    public MockInterview getMockInterview(final Long mockintid) {
+        return mockInterviewStore.getMockInterview(mockintid);
     }
 }

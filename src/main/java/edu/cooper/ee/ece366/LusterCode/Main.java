@@ -71,6 +71,7 @@ public class Main {
 
         //Mock Interview routing
         Spark.post("/mockinterview", mockInterviewHandler::createMockInterview, gson::toJson);
+        Spark.get("/mockinterview/:mockintID", mockInterviewHandler::getMockInterview, gson::toJson);
 
         options("/*", (request,response)->{
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");

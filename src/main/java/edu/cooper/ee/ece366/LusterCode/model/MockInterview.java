@@ -28,6 +28,15 @@ public class MockInterview {
         this.difficulty = difficulty;
         this.answerIDs = answerIDs;
     }
+
+    public MockInterview(Long id, String name, String difficulty){
+        this.id = id;
+        this.name = name;
+        this.askPostIDs = null;
+        this.difficulty = difficulty;
+        this.answerIDs = null;
+    }
+
     public MockInterview() {
         this.id = -1L;
         this.name = null;

@@ -59,6 +59,44 @@ public class MockInterviewStoreJdbi implements MockInterviewStore {
                                 .bind("answerID", answerID)
                                 .execute());
     }
+
+    @Override
+    public MockInterview getMockInterview(final Long intID) {
+        MockInterview mockInterview = jdbi.withHandle(
+                handler ->
+                        handler
+                                .createQuery("SELECT id, name, difficulty FROM mockints WHERE id = :intID")
+                                .bind("intID", intID)
+                                .mapToBean(MockInterview.class)
+                                .one());
+
+        List<Long> askPostIDs = getMockInterviewAskPostIDs(intID);
+        mockInterview.setAskPostIDs(askPostIDs);
+        List<Long> answerIDs = getMockInterviewAnswerIDs(intID);
+        mockInterview.setAnswerIDs(answerIDs);
+        return mockInterview;
+    }
+
+    private List<Long> getMockInterviewAskPostIDs(Long intID){
+        return jdbi.withHandle(
+                handler ->
+                        handler.
+                                createQuery("SELECT askPostID FROM mockintjoin WHERE intID = :intID")
+                                .bind("intID", intID)
+                                .mapTo(Long.class)
+                                .list());
+    }
+
+    private List<Long> getMockInterviewAnswerIDs(Long intID){
+        return jdbi.withHandle(
+                handler ->
+                        handler.
+                                createQuery("SELECT answerID FROM mockintjoin WHERE intID = :intID")
+                                .bind("intID", intID)
+                                .mapTo(Long.class)
+                                .list());
+    }
+
 }
 
 
