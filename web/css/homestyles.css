@@ -6,7 +6,7 @@ h1 {
     width: 30em;
     padding: 8px 12px;
     position: absolute;
-    top: 30%;
+    top: 15%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -80,6 +80,16 @@ h1 {
     opacity: 1;
 }
 
-.poststable {
-
+/* posts table */
+.table th{
+    background-color: grey;
 }
+
+.table tr:nth-child(odd) {
+    background-color: white;
+}
+
+.table tr:nth-child(even) {
+    background-color: grey;
+}
+

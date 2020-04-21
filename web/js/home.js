@@ -37,11 +37,16 @@ function displayMyPosts(data) {
     var noOfPosts = data.length;
     // CREATE DYNAMIC TABLE.
     var table = document.createElement("table");
-    table.style.width = '50%';
-    table.setAttribute('border', '1');
+    table.setAttribute("class","table");
+    table.style.width = '80%';
+    table.style.borderBottom = '5px solid black';
+    table.style.marginLeft = "auto";
+    table.style.marginRight = "auto";
+    table.style.marginTop = "15%";
     table.setAttribute('cellspacing', '0');
     table.setAttribute('cellpadding', '5');
-    table.setAttribute('height', '400px');
+    table.setAttribute('height', '500px');
+
 
     // retrieve column header ('Name', 'Email', and 'Mobile')
 
