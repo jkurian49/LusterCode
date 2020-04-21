@@ -20,6 +20,22 @@ h1 {
     color: white;
 }
 
+.confirm-popup {
+    display: none;
+    position: absolute;
+    height: 60px;
+    width: 700px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -500%);
+    background: lightgreen;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid white;
+}
+
 .form-popup {
     display: none;
     position: absolute;

@@ -27,14 +27,12 @@ public class UserService {
 
     public User login(final String username, final String password, Request request, Response response) {
         if (userStore.getUser(username).getPassword().equals(password)) {
-            System.out.print("Login Successful\n");
-
-            String cookieVal = "cookieVal"
+            System.out.print("login successful\n");
+            String cookieVal = "cookieVal";
             response.cookie("thisapp", cookieVal); //Set cookie for future requests
             cookieJar.put(cookieVal, username);
-
-//            System.out.print(request.cookies()); //Retrieve cookie from request
-
+        } else {
+            System.out.print("login failed");
         }
 
         return userStore.getUser(username);
