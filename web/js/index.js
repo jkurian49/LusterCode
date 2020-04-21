@@ -44,6 +44,7 @@ async function newSignup() {
     }).then(function (data) {
         // This is the JSON from our response
         openConfirmForm();
+        closeSignupForm();
         console.log(data);
     }).catch(function (err) {
         // There was an error
