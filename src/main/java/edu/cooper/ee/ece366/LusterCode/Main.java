@@ -47,7 +47,6 @@ public class Main {
 
         Spark.get("/user/:username/:password", userHandler::login, jsonTransformer);
 
-
         Spark.delete("/user/:username", userHandler::deleteUser, jsonTransformer);
 
         // post routing
