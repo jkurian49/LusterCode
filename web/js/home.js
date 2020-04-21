@@ -14,7 +14,7 @@ async function newPost() {
     fetch('http://localhost:4567/post',{
         method: 'POST',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*', 'Access-Control-Allow-Methods':'GET, POST'},
+        headers: {'Content-Type': 'application/json',
         body: JSON.stringify({
             username: 'Theo',
             postType: 'Question',
@@ -132,4 +132,3 @@ async function getAnswers(askpostID) {
         console.warn('Something went wrong.', err);
     });
 }
-
