@@ -31,10 +31,13 @@ public class UserService {
             String cookieVal = "cookieVal";
             response.cookie("thisapp", cookieVal); //Set cookie for future requests
             cookieJar.put(cookieVal, username);
+            //Reply with Success
+            response.header("login", "success");
         } else {
-            System.out.print("login failed");
+            System.out.print("login failed\n");
+            response.header("login", "fail");
+            //Reply with Fail
         }
-
         return userStore.getUser(username);
     }
 
