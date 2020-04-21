@@ -14,13 +14,13 @@ async function newPost() {
     fetch('http://localhost:4567/post',{
         method: 'POST',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json',
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             username: 'Theo',
             postType: 'Question',
             content: body,
-            tags: 'tags',
-            likes: 0})
+            likes: 0,
+            tags: 'tags'})
     }).then(function (response) {
         // The API call was successful!
         return response.json();

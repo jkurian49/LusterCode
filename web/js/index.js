@@ -24,7 +24,6 @@ async function newSignup() {
     var user = form.elements.user.value;
     var pass = form.elements.pass.value;
     var email = form.elements.email.value;
-    console.log(email);
 
     fetch('http://localhost:4567/user',{
         method: 'POST',
@@ -36,7 +35,6 @@ async function newSignup() {
             firstName: first,
             lastName: last,
             email: email})
-
     }).then(function (response) {
         // The API call was successful!
         return response.json();

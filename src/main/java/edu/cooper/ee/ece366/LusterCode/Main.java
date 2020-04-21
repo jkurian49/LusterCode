@@ -8,6 +8,7 @@ import org.jdbi.v3.core.Jdbi;
 import spark.Spark;
 
 import static spark.Spark.get;
+import static spark.Spark.options;
 
 public class Main {
     public static void main(String[] args) {
@@ -63,7 +64,18 @@ public class Main {
         Spark.get("/answers/:askPostID", answerHandler::getAnswers, gson::toJson);
         Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 
+        options("/*", (request,response)->{
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null) {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
+            if(accessControlRequestMethod != null){
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
 
+            return "OK";
+        });
 
        /* PostStore postStore = new PostStoreImpl();
         AnswerStore answerStore = new AnswerStoreImpl();
