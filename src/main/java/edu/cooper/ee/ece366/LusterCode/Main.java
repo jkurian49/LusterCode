@@ -65,7 +65,7 @@ public class Main {
         Spark.delete("/answer/:answerID", answerHandler::deleteAnswer, gson::toJson);
 
         //Mock Interview routing
-        Spark.post("/mockinterview", mockInterviewHandler::createMockInterview, gson::toJson);
+        //Spark.post("/mockinterview", mockInterviewHandler::createMockInterview, gson::toJson);
 
         options("/*", (request,response)->{
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
