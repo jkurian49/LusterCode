@@ -15,6 +15,9 @@ function closeSignupForm() {
     document.getElementById("sform").style.display = "none";
 }
 
+function openConfirmForm() {
+    document.getElementById("cform").style.display = "block";
+}
 
 async function newSignup() {
     var form = document.getElementById("signupform");
@@ -40,6 +43,7 @@ async function newSignup() {
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
+        openConfirmForm();
         console.log(data);
     }).catch(function (err) {
         // There was an error

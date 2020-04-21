@@ -15,6 +15,9 @@ function closeSignupForm() {
     document.getElementById("sform").style.display = "none";
 }
 
+function openLoginForm() {
+    document.getElementById("cform").style.display = "none";
+}
 
 async function newSignup() {
     var form = document.getElementById("signupform");
@@ -28,7 +31,7 @@ async function newSignup() {
     fetch('http://localhost:4567/user',{
         method: 'POST',
         mode: 'cors',
-        headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin':'*', 'Access-Control-Allow-Methods':'GET, POST'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
             username: user,
             password: pass,
