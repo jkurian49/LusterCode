@@ -109,7 +109,6 @@ function displayMyPosts(data) {
 
 function closeMyPosts() {
     document.getElementById("mypoststable").style.display = "none";
-
 }
 
 async function getMyPosts() {
@@ -127,39 +126,36 @@ async function getMyPosts() {
     });
 }
 
-// async function getPost(askpostID) {
-//     fetch('http://localhost:4567/post/'+askpostID ).then(function (response) {
-//         // The API call was successful!
-//         return response.json();
-//     }).then(function (data) {
-//         console.log(data);
-//         return data;
-//     })
-//         // This is the JSON from our response
-//     .catch(function (err) {
-//         // There was an error
-//         console.warn('Something went wrong.', err);
-//     });
+// async function getPost(askPostID) {
+//     let response = await fetch('http://localhost:4567/post/'+askPostID);
+//     return await response.json();
+// }
+//
+// let testvar = getPost('1').then(data=>console.log(data));
+// console.log(testvar);
+//
+// async function getAnswer(answerID) {
+//     let response = await fetch('http://localhost:4567/answer/'+answerID);
+//     return await response.json();
 // }
 
-async function getPost(askPostID) {
-    const response = await fetch('http://localhost:4567/post/' + askPostID);
-    return await response.json();
+function getPost(askPostID){
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:4567/post/'+askPostID)
+            .then(response=> {
+                return response.json();
+            }).then(data => {
+                //console.log(data);
+                resolve(data);
+        })
+    })
 }
-
-async function getAnswer(answerID) {
-    fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
-        // The API call was successful!
-        return response.json();
-    }).then(function (data) {
-        // This is the JSON from our response
-        return data;
-    }).catch(function (err) {
-        // There was an error
-        console.warn('Something went wrong.', err);
-    });
-}
-
+let question = '';
+getPost(1).then(data => {
+    question = data;
+    //console.log(question);
+});
+console.log(question);
 
 async function getMockInterviews() {
     const mockintid = 1;
@@ -185,9 +181,17 @@ function closeMockInterviewNav() {
     document.getElementById("mockintnav").style.display = "none";
 }
 
-// function to take mock interview
+function Post(content) {
+    this.content = content;
+}
+function Answer(content) {
+    this.content = content;
+}
+
 async function showMockInterview(mockintid) {
     closeMockInterviewNav();
+    let questions = [];
+    let answers = [];
     fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
@@ -197,25 +201,45 @@ async function showMockInterview(mockintid) {
         document.getElementById("mockint-name").innerHTML=data.name;
         let posts = "askPostIDs";
         let askPostIDs = data[posts];
-        let answers = "answerIDs";
-        let answerIDs = data[answers];
+        let ans = "answerIDs";
+        let answerIDs = data[ans];
         let content = "content";
         for (let ii = 0; ii < askPostIDs.length; ii++) {
             let askPostID = askPostIDs[ii];
             let answerID = answerIDs[ii];
-            console.log(getPost(askPostID));
-            // let answer = getAnswer(answerID);
-            //console.log(askPost);
-            // let question = askPost[content];
-            // let correct_answer = answer[content];
-            // console.log(question);
-            // console.log(correct_answer);
+            fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
+                // The API call was successful!
+                return response.json();
+            }).then(function (post) {
+                questions[ii] = post.content;
+                //console.log(questions[0].content);
+                fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
+                    // The API call was successful!
+                    return response.json();
+                }).then(function (answer) {
+                    answers[ii] = answer.content;
+                    let questionholder = document.getElementById("mockintquestion");
+                    questionholder.style.display = "block";
+                    questionholder.value = questions[ii];
+                    questionholder.setAttribute("class","question-holder");
+                });
+            });
         }
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
     });
 }
+
+
+function displayMockInterviewQuestion(question) {
+    document.getElementById("mockintquestion").value = question;
+
+}
+function displayMockInterviewAnswer(answer) {
+    document.getElementById("mockintanswer").value = answer;
+}
+
 
 function showMockInterviewOverlay() {
     document.getElementById("mockintoverlay").style.display = "block";
