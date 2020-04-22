@@ -25,20 +25,22 @@ public class UserService {
         return userStore.getUser(username);
     }
 
-    public User login(final String username, final String password, Request request, Response response) {
+    public String login(final String username, final String password, Request request, Response response) {
         if (userStore.getUser(username).getPassword().equals(password)) {
             System.out.print("login successful\n");
             String cookieVal = "cookieVal";
             response.cookie("thisapp", cookieVal); //Set cookie for future requests
             cookieJar.put(cookieVal, username);
             //Reply with Success
-            response.header("login", "success");
+            //response.header("login", "success");
+            return "success";
         } else {
             System.out.print("login failed\n");
             response.header("login", "fail");
             //Reply with Fail
+            return "failure";
         }
-        return userStore.getUser(username);
+
     }
 
     public String deleteUser(final String username) {

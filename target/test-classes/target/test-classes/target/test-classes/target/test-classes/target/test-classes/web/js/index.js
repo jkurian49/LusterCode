@@ -13,7 +13,6 @@ function openSignupForm() {
 
 function closeSignupForm() {
     document.getElementById("sform").style.display = "none";
-    //window.location.href = "home.html";
 }
 
 function openConfirmForm() {
@@ -65,6 +64,10 @@ async function login() {
     }).then(function (data) {
         // This is the JSON from our response
         console.log(data);
+        var parsed = JSON.parse(data);
+        if (parsed.login === "success"){
+            window.location.href = "www.google.com";
+        }
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);

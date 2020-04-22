@@ -64,9 +64,8 @@ async function login() {
     }).then(function (data) {
         // This is the JSON from our response
         console.log(data);
-        var parsed = JSON.parse(data);
-        if (parsed.login === "success"){
-            window.location.href = "www.google.com";
+        if (data.includes("success")){
+            window.location.href = "home.html";
         }
     }).catch(function (err) {
         // There was an error

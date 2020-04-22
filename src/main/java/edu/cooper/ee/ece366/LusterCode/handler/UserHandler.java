@@ -26,7 +26,7 @@ public class UserHandler {
         return userService.getUser(username);
     }
 
-    public User login(final Request req, final Response res) {
+    public String login(final Request req, final Response res) {
         String username = String.valueOf(req.params(":username"));
         String password = String.valueOf(req.params(":password"));
         return userService.login(username, password, req, res);
