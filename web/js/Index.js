@@ -19,6 +19,10 @@ function openConfirmForm() {
     document.getElementById("cform").style.display = "block";
 }
 
+function openFailForm() {
+    document.getElementById("fform").style.display = "block";
+}
+
 async function newSignup() {
     var form = document.getElementById("signupform");
 
@@ -66,6 +70,8 @@ async function login() {
         console.log(data);
         if (data.includes("success")){
             window.location.href = "home.html";
+        } else {
+            openFailForm();
         }
     }).catch(function (err) {
         // There was an error

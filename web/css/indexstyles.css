@@ -33,7 +33,23 @@ h1 {
     color: black;
     text-align: center;
     font-size: 20px;
-    border: 1px solid white;
+    border: 1px solid darkgreen;
+}
+
+.loginfail-popup {
+    display: none;
+    position: absolute;
+    height: 60px;
+    width: 700px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -500%);
+    background: #ff6666;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid darkred;
 }
 
 .form-popup {
