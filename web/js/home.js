@@ -43,8 +43,10 @@ function displayMyPosts(data) {
     table.style.marginLeft = "auto";
     table.style.marginRight = "auto";
     table.style.marginTop = "10%";
+    table.style.bgcolor = "#b3d8ff";
     table.style.width = "80%";
-    table.setAttribute('cellspacing', '0');
+    table.style.border = "1px solid black";
+    table.setAttribute('cellspacing', '1');
     table.setAttribute('cellpadding', '5');
     table.setAttribute('height', '500px');
 
@@ -62,13 +64,15 @@ function displayMyPosts(data) {
 
     // CREATE TABLE HEAD .
     var tHead = document.createElement("thead");
+        //tHead.setAttribute("class", "table")
+        //tHead.style.bgcolor = "#b3d8ff";
 
 
     // CREATE ROW FOR TABLE HEAD .
     var hRow = document.createElement("tr");
 
     // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
-    for (var i = 0; i < col.length; i++) {
+    for (var i = 1; i < col.length; i++) {
         var th = document.createElement("th");
         th.innerHTML = col[i];
         hRow.appendChild(th);
@@ -84,10 +88,11 @@ function displayMyPosts(data) {
 
         var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
 
-
-        for (var j = 0; j < col.length; j++) {
+        //CHANGES POSTS ROW BY ROW
+        for (var j = 1; j < col.length; j++) {
             var td = document.createElement("td");
             td.innerHTML = data[i][col[j]];
+            td.style.border = "1px solid grey"
             bRow.appendChild(td);
         }
         tBody.appendChild(bRow)
