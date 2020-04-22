@@ -70,6 +70,23 @@ h1 {
     border-left: solid darkslategray;
 }
 
+.signupform-popup {
+    display: none;
+    width: 20%;
+    height: 50%;
+    padding: 20px 20px 40px 20px;
+    background: white;
+    position: absolute;
+    top: 40%;
+    margin-top: 15%;
+    left: 80%;
+    margin-right: -50%;
+    transform: translate(-50%, -100%);
+    text-align: center;
+    color: black;
+    border-left: solid darkslategray;
+}
+
 .textbox {
     background-color: #eeeeee;
     color: black;
