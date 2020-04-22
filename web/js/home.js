@@ -121,34 +121,36 @@ async function getMyPosts() {
     });
 }
 
-async function getPost(askPostID) {
-    let post = null;
-    fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
-        // The API call was successful!
-        return response.json();
-    }).then(function (data) {
+// async function getPost(askPostID) {
+//     let response = await fetch('http://localhost:4567/post/'+askPostID);
+//     return await response.json();
+// }
+//
+// let testvar = getPost('1').then(data=>console.log(data));
+// console.log(testvar);
+//
+// async function getAnswer(answerID) {
+//     let response = await fetch('http://localhost:4567/answer/'+answerID);
+//     return await response.json();
+// }
 
-        return data;
+function getPost(askPostID){
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:4567/post/'+askPostID)
+            .then(response=> {
+                return response.json();
+            }).then(data => {
+                //console.log(data);
+                resolve(data);
+        })
     })
-        // This is the JSON from our response
-    .catch(function (err) {
-        // There was an error
-        console.warn('Something went wrong.', err);
-    });
 }
-
-async function getAnswer(answerID) {
-    fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
-        // The API call was successful!
-        return response.json();
-    }).then(function (data) {
-        // This is the JSON from our response
-        return data;
-    }).catch(function (err) {
-        // There was an error
-        console.warn('Something went wrong.', err);
-    });
-}
+let question = '';
+getPost(1).then(data => {
+    question = data;
+    //console.log(question);
+});
+console.log(question);
 
 async function getMockInterviews() {
     const mockintid = 1;
@@ -177,19 +179,14 @@ function closeMockInterviewNav() {
 function Post(content) {
     this.content = content;
 }
-function Answer(answer) {
-    this.answer = answer;
+function Answer(content) {
+    this.content = content;
 }
-// function to take mock interview
+
 async function showMockInterview(mockintid) {
     closeMockInterviewNav();
     let questions = [];
     let answers = [];
-    // remove this hardcoded value
-    for(let jj = 0; jj < 5;jj++){
-        questions[jj] = new Post();
-        answers[jj] = new Answer();
-    }
     fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
@@ -202,7 +199,6 @@ async function showMockInterview(mockintid) {
         let ans = "answerIDs";
         let answerIDs = data[ans];
         let content = "content";
-
         for (let ii = 0; ii < askPostIDs.length; ii++) {
             let askPostID = askPostIDs[ii];
             let answerID = answerIDs[ii];
@@ -210,20 +206,33 @@ async function showMockInterview(mockintid) {
                 // The API call was successful!
                 return response.json();
             }).then(function (post) {
-                questions[ii].content = post.content;
+                questions[ii] = post.content;
+                //console.log(questions[0].content);
                 fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
                     // The API call was successful!
                     return response.json();
                 }).then(function (answer) {
-                    answers[ii].content = answer.content;
+                    answers[ii] = answer.content;
+                    let questionholder = document.getElementById("mockintquestion");
+                    questionholder.style.display = "block";
+                    questionholder.value = questions[ii];
+                    questionholder.setAttribute("class","question-holder");
                 });
             });
         }
-
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
     });
+}
+
+
+function displayMockInterviewQuestion(question) {
+    document.getElementById("mockintquestion").value = question;
+
+}
+function displayMockInterviewAnswer(answer) {
+    document.getElementById("mockintanswer").value = answer;
 }
 
 
