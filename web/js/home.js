@@ -104,7 +104,6 @@ function displayMyPosts(data) {
 
 function closeMyPosts() {
     document.getElementById("mypoststable").style.display = "none";
-
 }
 
 async function getMyPosts() {
@@ -122,24 +121,18 @@ async function getMyPosts() {
     });
 }
 
-// async function getPost(askpostID) {
-//     fetch('http://localhost:4567/post/'+askpostID ).then(function (response) {
-//         // The API call was successful!
-//         return response.json();
-//     }).then(function (data) {
-//         console.log(data);
-//         return data;
-//     })
-//         // This is the JSON from our response
-//     .catch(function (err) {
-//         // There was an error
-//         console.warn('Something went wrong.', err);
-//     });
-// }
-
 async function getPost(askPostID) {
-    const response = await fetch('http://localhost:4567/post/' + askPostID);
-    return await response.json();
+    fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
+        // The API call was successful!
+        return response.json();
+    }).then(function (data) {
+        return data;
+    })
+        // This is the JSON from our response
+    .catch(function (err) {
+        // There was an error
+        console.warn('Something went wrong.', err);
+    });
 }
 
 async function getAnswer(answerID) {
@@ -154,7 +147,6 @@ async function getAnswer(answerID) {
         console.warn('Something went wrong.', err);
     });
 }
-
 
 async function getMockInterviews() {
     const mockintid = 1;
@@ -198,13 +190,14 @@ async function showMockInterview(mockintid) {
         for (let ii = 0; ii < askPostIDs.length; ii++) {
             let askPostID = askPostIDs[ii];
             let answerID = answerIDs[ii];
-            console.log(getPost(askPostID));
-            // let answer = getAnswer(answerID);
-            //console.log(askPost);
-            // let question = askPost[content];
-            // let correct_answer = answer[content];
+            fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
+                // The API call was successful!
+                return response.json();
+            }).then(function (post) {
+                let question = post.content;
+            });
             // console.log(question);
-            // console.log(correct_answer);
+
         }
     }).catch(function (err) {
         // There was an error
