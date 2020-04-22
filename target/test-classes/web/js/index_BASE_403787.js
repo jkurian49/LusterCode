@@ -58,15 +58,14 @@ async function login() {
     var username = form.elements.username.value;
     var password = form.elements.password.value;
 
-    fetch('http://localhost:4567/user/'+username+'/'+password).then(function (response) {
+    fetch('http://localhost:4567/users/'+username+"/"+password).then(function (response) {
         // The API call was successful!
-        console.log(response.headers);
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
-        console.log(data)
-        var key = 'login';
-        if (data[key] === "success"){
+        console.log(data);
+        var parsed = JSON.parse(data);
+        if (parsed.login === "success"){
             window.location.href = "www.google.com";
         }
     }).catch(function (err) {

@@ -13,7 +13,6 @@ function openSignupForm() {
 
 function closeSignupForm() {
     document.getElementById("sform").style.display = "none";
-    //window.location.href = "home.html";
 }
 
 function openConfirmForm() {
@@ -59,12 +58,17 @@ async function login() {
     var username = form.elements.username.value;
     var password = form.elements.password.value;
 
-    fetch('http://localhost:4567/users/'+username+"/"+password).then(function (response) {
+    fetch('http://localhost:4567/user/'+username+'/'+password).then(function (response) {
         // The API call was successful!
+        console.log(response.headers);
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
-        console.log(data);
+        console.log(data)
+        var key = 'login';
+        if (data[key] === "success"){
+            window.location.href = "www.google.com";
+        }
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);

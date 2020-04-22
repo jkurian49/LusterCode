@@ -64,10 +64,16 @@ async function login() {
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
+<<<<<<< HEAD
         console.log(data)
         var key = 'login';
         if (data[key] === "success"){
             window.location.href = "www.google.com";
+=======
+        console.log(data);
+        if (data.includes("success")){
+            window.location.href = "home.html";
+>>>>>>> login3
         }
     }).catch(function (err) {
         // There was an error
