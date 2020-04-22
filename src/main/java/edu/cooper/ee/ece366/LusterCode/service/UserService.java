@@ -33,6 +33,7 @@ public class UserService {
             cookieJar.put(cookieVal, username);
             //Reply with Success
             //response.header("login", "success");
+            System.out.print(request.cookies());
             return "success";
         } else {
             System.out.print("login failed\n");
