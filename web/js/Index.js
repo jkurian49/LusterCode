@@ -58,7 +58,7 @@ async function login() {
     var username = form.elements.username.value;
     var password = form.elements.password.value;
 
-    fetch('http://localhost:4567/users/'+username+"/"+password).then(function (response) {
+    fetch('http://localhost:4567/user/'+username+'/'+password).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
