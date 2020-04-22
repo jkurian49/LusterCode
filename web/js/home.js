@@ -174,9 +174,22 @@ function closeMockInterviewNav() {
     document.getElementById("mockintnav").style.display = "none";
 }
 
+function Post(content) {
+    this.content = content;
+}
+function Answer(answer) {
+    this.answer = answer;
+}
 // function to take mock interview
 async function showMockInterview(mockintid) {
     closeMockInterviewNav();
+    let questions = [];
+    let answers = [];
+    // remove this hardcoded value
+    for(let jj = 0; jj < 5;jj++){
+        questions[jj] = new Post();
+        answers[jj] = new Answer();
+    }
     fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
@@ -186,9 +199,10 @@ async function showMockInterview(mockintid) {
         document.getElementById("mockint-name").innerHTML=data.name;
         let posts = "askPostIDs";
         let askPostIDs = data[posts];
-        let answers = "answerIDs";
-        let answerIDs = data[answers];
+        let ans = "answerIDs";
+        let answerIDs = data[ans];
         let content = "content";
+
         for (let ii = 0; ii < askPostIDs.length; ii++) {
             let askPostID = askPostIDs[ii];
             let answerID = answerIDs[ii];
@@ -196,23 +210,22 @@ async function showMockInterview(mockintid) {
                 // The API call was successful!
                 return response.json();
             }).then(function (post) {
-                let question = post.content;
+                questions[ii].content = post.content;
                 fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
                     // The API call was successful!
                     return response.json();
-                }).then(function (post) {
-                    let answer = post.content;
+                }).then(function (answer) {
+                    answers[ii].content = answer.content;
                 });
             });
-            // console.log(question);
-
-
         }
+
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
     });
 }
+
 
 function showMockInterviewOverlay() {
     document.getElementById("mockintoverlay").style.display = "block";

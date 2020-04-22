@@ -11,4 +11,3 @@ edu/cooper/ee/ece366/LusterCode/model/Post.class
 edu/cooper/ee/ece366/LusterCode/service/AnswerService.class
 edu/cooper/ee/ece366/LusterCode/store/AnswerStoreJdbi.class
 edu/cooper/ee/ece366/LusterCode/model/Answer.class
-edu/cooper/ee/ece366/LusterCode/store/PostStoreImpl.class
