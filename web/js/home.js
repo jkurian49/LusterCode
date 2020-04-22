@@ -3,7 +3,7 @@ function openPostForm() {
     document.getElementById("myForm").style.display = "block";
 }
 
-function closeForm() {
+function closePostForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
@@ -37,18 +37,19 @@ function displayMyPosts(data) {
     var noOfPosts = data.length;
     // CREATE DYNAMIC TABLE.
     var table = document.createElement("table");
+    document.getElementById("mypoststable").style.display = "inline";
     table.setAttribute("class","table");
-    table.style.width = '80%';
     table.style.borderBottom = '5px solid black';
     table.style.marginLeft = "auto";
     table.style.marginRight = "auto";
     table.style.marginTop = "15%";
+    table.style.width = "80%";
     table.setAttribute('cellspacing', '0');
     table.setAttribute('cellpadding', '5');
     table.setAttribute('height', '500px');
 
 
-    // retrieve column header ('Name', 'Email', and 'Mobile')
+    // retrieve column header
 
     var col = []; // define an empty array
     for (var i = 0; i < noOfPosts; i++) {
@@ -99,11 +100,11 @@ function displayMyPosts(data) {
     var divContainer = document.getElementById("mypoststable");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
-    /*
-        for (var i=0;i<data.length;i++) {
-            var username = data[i].username;
-            var content  = data[i].content;
-        } */
+}
+
+function closeMyPosts() {
+    document.getElementById("mypoststable").style.display = "none";
+
 }
 
 async function getMyPosts() {
@@ -151,12 +152,14 @@ async function getAnswer(answerID) {
     });
 }
 
-async function getMockInterviews(mockintid) {
+async function getMockInterviews() {
+    const mockintid = 1;
     fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
+        const intname = data.name;
         console.log(data);
     }).catch(function (err) {
         // There was an error

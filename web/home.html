@@ -11,8 +11,9 @@
     <h1>LusterCode</h1>
     <div class = homenav>
 
-        <button class="open-button" id = "postbtn" onclick="openPostForm()">Ask a Question</button>
-        <button class="open-button" id = "viewpostsbtn" onclick="getMyPosts()">View Your Posts</button>
+        <button class="open-button" id = "postbtn" onclick="openPostForm(); closeMyPosts();">Ask a Question</button>
+        <button class="open-button" id = "viewpostsbtn" onclick="getMyPosts(); closePostForm();">View Your Posts</button>
+        <button class="open-button" id = "viewmockintsbtn" onclick="getMockInterviews(); closePostForm(); closeMyPosts();">Take a Mock Interview</button>
     </div>
     <div class="form-popup" id="myForm">
         <form id ="newpost" class="form-container">
@@ -21,10 +22,11 @@
             <textarea id = "body" name="body"></textarea>
 
             <button type="submit" onclick="newPost()" class="btn">Submit</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+            <button type="button" class="btn cancel" onclick="closePostForm()">Close</button>
         </form>
     </div>
     <div id="mypoststable"></div>
+    <div id="mockint-nav"></div>
 
 </body>
 </html>

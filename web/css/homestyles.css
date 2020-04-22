@@ -3,7 +3,7 @@ h1 {
 }
 
 .homenav{
-    width: 30em;
+    width: 50em;
     padding: 8px 12px;
     position: absolute;
     top: 15%;
@@ -22,6 +22,7 @@ h1 {
     height:100px;
     width:200px;
     font-size: 20px;
+    vertical-align: top;
 }
 
 /* The popup form - hidden by default */

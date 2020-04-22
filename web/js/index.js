@@ -60,11 +60,13 @@ async function login() {
 
     fetch('http://localhost:4567/user/'+username+'/'+password).then(function (response) {
         // The API call was successful!
+        console.log(response.headers);
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
-        console.log(data);
-        if (data.login === "success"){
+        console.log(data)
+        var key = 'login';
+        if (data[key] === "success"){
             window.location.href = "www.google.com";
         }
     }).catch(function (err) {
