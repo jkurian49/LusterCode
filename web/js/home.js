@@ -122,10 +122,12 @@ async function getMyPosts() {
 }
 
 async function getPost(askPostID) {
+    let post = null;
     fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
         // The API call was successful!
         return response.json();
     }).then(function (data) {
+
         return data;
     })
         // This is the JSON from our response
@@ -195,8 +197,15 @@ async function showMockInterview(mockintid) {
                 return response.json();
             }).then(function (post) {
                 let question = post.content;
+                fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
+                    // The API call was successful!
+                    return response.json();
+                }).then(function (post) {
+                    let answer = post.content;
+                });
             });
             // console.log(question);
+
 
         }
     }).catch(function (err) {
