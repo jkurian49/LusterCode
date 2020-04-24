@@ -2,6 +2,7 @@ package edu.cooper.ee.ece366.LusterCode.model;
 
 import com.google.gson.annotations.Expose;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Post {
 
@@ -12,18 +13,20 @@ public class Post {
     @Expose private String content;
     @Expose private String tags;
     @Expose private Integer likes; // eventually this will include list of users (like might be its own class)
-    @Expose private LocalDateTime timestamp;
+    @Expose private String timestamp;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     //for retrieving object from database
     public Post(Long id, String username, String postType, String content,
-                  String tags, Integer likes, LocalDateTime timestamp){
+                String tags, Integer likes, LocalDateTime timestamp){
         this.id = -1L;
         this.username = username;
         this.postType = postType;
         this.content = content;
         this.tags = tags;
         this.likes = likes;
-        this.timestamp = timestamp;
+        this.timestamp = timestamp.format(formatter);
     }
 
     //for creating object to be stored in database, which creates its own ID
@@ -35,7 +38,7 @@ public class Post {
         this.content = content;
         this.tags = tags;
         this.likes = likes;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now().format(formatter);
     }
 
     //blank post, just because
@@ -46,7 +49,7 @@ public class Post {
         this.content = null;
         this.tags = null;
         this.likes = 0;
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = LocalDateTime.now().format(formatter);
     }
 
     public Long getID() { return id; }
@@ -55,7 +58,7 @@ public class Post {
     public String getContent() { return content; }
     public String getTags() { return tags; }
     public Integer getLikes() { return likes; }
-    public LocalDateTime getTimestamp() { return timestamp; }
+    public String getTimestamp() { return timestamp; }
 
     public void setID(Long id) { this.id = id; }
     public void setUsername(String username) { this.username = username; }
@@ -63,6 +66,6 @@ public class Post {
     public void setContent(String content) { this.content = content; }
     public void setTags(String tags) { this.tags = tags; }
     public void setLikes(Integer likes) { this.likes = likes; }
-    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
 
 }

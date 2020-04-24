@@ -10,9 +10,9 @@
     <h1>LusterCode</h1>
     <div class = homenav>
 
-        <button class="open-button" id = "postbtn" onclick="openPostForm(); closeMyPosts(); closeMockInterviewNav(); ">Ask a Question</button>
-        <button class="open-button" id = "viewpostsbtn" onclick="getMyPosts(); closePostForm(); closeMockInterviewNav(); ">View Your Posts</button>
-        <button class="open-button" id = "viewmockintsbtn" onclick="getMockInterviews(); closePostForm(); closeMyPosts();">Take a Mock Interview</button>
+        <button class="open-button" id = "postbtn" onclick="openPostForm(); closeMyPosts(); closeMockInterviewNav(); closeMockInterviewOverlay();">Ask a Question</button>
+        <button class="open-button" id = "viewpostsbtn" onclick="getMyPosts(); closePostForm(); closeMockInterviewNav(); closeMockInterviewOverlay(); ">View Your Posts</button>
+        <button class="open-button" id = "viewmockintsbtn" onclick="getMockInterviews(); closePostForm(); closeMyPosts(); closeMockInterviewOverlay();">Take a Mock Interview</button>
     </div>
     <div class="form-popup" id="myForm">
         <form id ="newpost" class="form-container">
@@ -29,7 +29,7 @@
         <input class = "mockintnavbtns" type="button" id="1" onclick="showMockInterview(id);"/>
     </div>
     <div class="mockint-overlay" id ="mockintoverlay">
-        <h2 id = "mockint-name"></h2>
+        <h2 id = "mockint-name" style="text-align: left"></h2>
         <textarea class="mockint-question>" id = "mockintquestion"></textarea>
         <textarea class="mockint-answer" id="mockintanswer"></textarea>
         <button class="mockint-button" id = "checkbtn">View Answer</button>

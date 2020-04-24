@@ -16,7 +16,7 @@ async function newPost() {
         mode: 'cors',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            username: 'Theo',
+            username: 'Jason',
             postType: 'Question',
             content: body,
             likes: 0,
@@ -230,6 +230,7 @@ async function showMockInterview(mockintid) {
         console.warn('Something went wrong.', err);
     });
 }
+
 
 
 function displayMockInterviewQuestion(question) {
