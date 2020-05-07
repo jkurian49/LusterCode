@@ -53,6 +53,7 @@ function displayMyPosts(data) {
 
     // retrieve column header
 
+    //var col = ['ID','Username','PostType','Question','Tags','Likes','Timestamp']; // define an empty array
     var col = []; // define an empty array
     for (var i = 0; i < noOfPosts; i++) {
         for (var key in data[i]) {
@@ -70,9 +71,11 @@ function displayMyPosts(data) {
 
     // CREATE ROW FOR TABLE HEAD .
     var hRow = document.createElement("tr");
+    //hRow.style.bgcolor = "#b3d8ff";
 
     // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
     for (var i = 1; i < col.length; i++) {
+        if (i === 2) {continue; } // remove postType
         var th = document.createElement("th");
         th.innerHTML = col[i];
         hRow.appendChild(th);
@@ -90,11 +93,17 @@ function displayMyPosts(data) {
 
         //CHANGES POSTS ROW BY ROW
         for (var j = 1; j < col.length; j++) {
+            if (j === 2) {continue; } // remove postType
             var td = document.createElement("td");
             td.innerHTML = data[i][col[j]];
             td.style.border = "1px solid grey"
             bRow.appendChild(td);
         }
+        var btn = document.createElement('showpostsanswers');
+        btn.type = "button";
+        btn.className = "tablebtn";
+        btn.value = "View Answers";
+        bRow.appendChild(btn);
         tBody.appendChild(bRow)
 
     }
@@ -133,11 +142,13 @@ async function getMyPosts() {
 //
 // let testvar = getPost('1').then(data=>console.log(data));
 // console.log(testvar);
-//
+
 // async function getAnswer(answerID) {
-//     let response = await fetch('http://localhost:4567/answer/'+answerID);
+//     const response = await fetch('http://localhost:4567/answer/'+answerID);
 //     return await response.json();
 // }
+
+
 
 function getPost(askPostID){
     return new Promise((resolve, reject) => {
