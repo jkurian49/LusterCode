@@ -69,7 +69,7 @@ async function login() {
         // This is the JSON from our response
         console.log(data);
         if (data.includes("success")){
-            window.location.href = "home.html";
+            window.location.href = "OLDhome.html";
         } else {
             openFailForm();
         }
