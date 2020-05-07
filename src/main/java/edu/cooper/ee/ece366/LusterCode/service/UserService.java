@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
+import org.mindrot.jbcrypt.*;
 
 public class UserService {
 
@@ -18,6 +19,9 @@ public class UserService {
     }
 
     public User createUser(final User user){
+        String salt = BCrypt.gensalt();
+        System.out.print(salt);
+        user.password = BCrypt.hashpw(user.password, salt);
         return userStore.addUser(user);
     }
 
@@ -26,19 +30,16 @@ public class UserService {
     }
 
     public String login(final String username, final String password, Request request, Response response) {
-        if (userStore.getUser(username).getPassword().equals(password)) {
+        if (BCrypt.checkpw(password, userStore.getUser(username).getPassword())) { //Login Success
             System.out.print("login successful\n");
             String cookieVal = "cookieVal";
             response.cookie("thisapp", cookieVal); //Set cookie for future requests
             cookieJar.put(cookieVal, username);
-            //Reply with Success
-            //response.header("login", "success");
             System.out.print(request.cookies());
             return "success";
-        } else {
+        } else { //Login Fail
             System.out.print("login failed\n");
             response.header("login", "fail");
-            //Reply with Fail
             return "failure";
         }
 

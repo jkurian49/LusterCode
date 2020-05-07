@@ -7,12 +7,12 @@ import java.util.List;
 
 public class User {
     // Instance Variables
-    @Expose private Long id;
-    @Expose private String username;
-    @Expose private String password;
-    @Expose private String firstName;
-    @Expose private String lastName;
-    @Expose private String email;
+    @Expose public Long id;
+    @Expose public String username;
+    @Expose public String password;
+    @Expose public String firstName;
+    @Expose public String lastName;
+    @Expose public String email;
 
     // Constructor Declaration of Class
     public User(Long id, String username, String password, String firstName, String lastName, String email) {
