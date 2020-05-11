@@ -33,88 +33,88 @@ async function newPost() {
     });
 }
 
-function displayMyPosts(data) {
-    var noOfPosts = data.length;
-    // CREATE DYNAMIC TABLE.
-    var table = document.createElement("table");
-    document.getElementById("mypoststable").style.display = "inline";
-    table.setAttribute("class","table");
-    table.style.borderBottom = '5px solid black';
-    table.style.marginLeft = "auto";
-    table.style.marginRight = "auto";
-    table.style.marginTop = "10%";
-    table.style.bgcolor = "#b3d8ff";
-    table.style.width = "80%";
-    table.style.border = "1px solid black";
-    table.setAttribute('cellspacing', '1');
-    table.setAttribute('cellpadding', '5');
-    table.setAttribute('height', '500px');
-
-
-    // retrieve column header
-
-    //var col = ['ID','Username','PostType','Question','Tags','Likes','Timestamp']; // define an empty array
-    var col = []; // define an empty array
-    for (var i = 0; i < noOfPosts; i++) {
-        for (var key in data[i]) {
-            if (col.indexOf(key) === -1) {
-                col.push(key);
-            }
-        }
-    }
-
-    // CREATE TABLE HEAD .
-    var tHead = document.createElement("thead");
-        //tHead.setAttribute("class", "table")
-        //tHead.style.bgcolor = "#b3d8ff";
-
-
-    // CREATE ROW FOR TABLE HEAD .
-    var hRow = document.createElement("tr");
-    //hRow.style.bgcolor = "#b3d8ff";
-
-    // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
-    for (var i = 1; i < col.length; i++) {
-        if (i === 2) {continue; } // remove postType
-        var th = document.createElement("th");
-        th.innerHTML = col[i];
-        hRow.appendChild(th);
-    }
-    tHead.appendChild(hRow);
-    table.appendChild(tHead);
-
-    // CREATE TABLE BODY .
-    var tBody = document.createElement("tbody");
-
-    // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
-    for (var i = 0; i < noOfPosts; i++) {
-
-        var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
-
-        //CHANGES POSTS ROW BY ROW
-        for (var j = 1; j < col.length; j++) {
-            if (j === 2) {continue; } // remove postType
-            var td = document.createElement("td");
-            td.innerHTML = data[i][col[j]];
-            td.style.border = "1px solid grey"
-            bRow.appendChild(td);
-        }
-        var btn = document.createElement('showpostsanswers');
-        btn.type = "button";
-        btn.className = "tablebtn";
-        btn.value = "View Answers";
-        bRow.appendChild(btn);
-        tBody.appendChild(bRow)
-
-    }
-    table.appendChild(tBody);
-
-
-    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-    var divContainer = document.getElementById("mypoststable");
-    divContainer.innerHTML = "";
-    divContainer.appendChild(table);
-}
+// function displayMyPosts(data) {
+//     var noOfPosts = data.length;
+//     // CREATE DYNAMIC TABLE.
+//     var table = document.createElement("table");
+//     document.getElementById("mypoststable").style.display = "inline";
+//     table.setAttribute("class","table");
+//     table.style.borderBottom = '5px solid black';
+//     table.style.marginLeft = "auto";
+//     table.style.marginRight = "auto";
+//     table.style.marginTop = "10%";
+//     table.style.bgcolor = "#b3d8ff";
+//     table.style.width = "80%";
+//     table.style.border = "1px solid black";
+//     table.setAttribute('cellspacing', '1');
+//     table.setAttribute('cellpadding', '5');
+//     table.setAttribute('height', '500px');
+//
+//
+//     // retrieve column header
+//
+//     //var col = ['ID','Username','PostType','Question','Tags','Likes','Timestamp']; // define an empty array
+//     var col = []; // define an empty array
+//     for (var i = 0; i < noOfPosts; i++) {
+//         for (var key in data[i]) {
+//             if (col.indexOf(key) === -1) {
+//                 col.push(key);
+//             }
+//         }
+//     }
+//
+//     // CREATE TABLE HEAD .
+//     var tHead = document.createElement("thead");
+//         //tHead.setAttribute("class", "table")
+//         //tHead.style.bgcolor = "#b3d8ff";
+//
+//
+//     // CREATE ROW FOR TABLE HEAD .
+//     var hRow = document.createElement("tr");
+//     //hRow.style.bgcolor = "#b3d8ff";
+//
+//     // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+//     for (var i = 1; i < col.length; i++) {
+//         if (i === 2) {continue; } // remove postType
+//         var th = document.createElement("th");
+//         th.innerHTML = col[i];
+//         hRow.appendChild(th);
+//     }
+//     tHead.appendChild(hRow);
+//     table.appendChild(tHead);
+//
+//     // CREATE TABLE BODY .
+//     var tBody = document.createElement("tbody");
+//
+//     // ADD COLUMN HEADER TO ROW OF TABLE HEAD.
+//     for (var i = 0; i < noOfPosts; i++) {
+//
+//         var bRow = document.createElement("tr"); // CREATE ROW FOR EACH RECORD .
+//
+//         //CHANGES POSTS ROW BY ROW
+//         for (var j = 1; j < col.length; j++) {
+//             if (j === 2) {continue; } // remove postType
+//             var td = document.createElement("td");
+//             td.innerHTML = data[i][col[j]];
+//             td.style.border = "1px solid grey"
+//             bRow.appendChild(td);
+//         }
+//         var btn = document.createElement('showpostsanswers');
+//         btn.type = "button";
+//         btn.className = "tablebtn";
+//         btn.value = "View Answers";
+//         bRow.appendChild(btn);
+//         tBody.appendChild(bRow)
+//
+//     }
+//     table.appendChild(tBody);
+//
+//
+//     // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+//     var divContainer = document.getElementById("mypoststable");
+//     divContainer.innerHTML = "";
+//     divContainer.appendChild(table);
+// }
 
 function closeMyPosts() {
     document.getElementById("mypoststable").style.display = "none";
@@ -127,19 +127,50 @@ async function getMyPosts() {
         return response.json();
     }).then(function (data) {
         // This is the JSON from our response
-        console.log(data);
-        displayMyPosts(data);
+        //console.log(data);
+        //displayMyPosts(data);
+        for (let i = 0; i < data.length; i++) {
+            displayPost(data[i])
+        }
     }).catch(function (err) {
         // There was an error
         console.warn('Something went wrong.', err);
     });
 }
 
+function displayPost(data) {
+    // post container
+    console.log(data);
+    let postdiv = document.createElement('div');
+    postdiv.setAttribute('class','post-overlay');
+    document.getElementById('mypostscontainer').append(postdiv);
+    // timestamp
+    let posttimediv = document.createElement('div');
+    posttimediv.setAttribute('class','posttime');
+    postdiv.appendChild(posttimediv);
+    let posttimestamp = document.createTextNode(data.timestamp);
+    posttimediv.appendChild(posttimestamp);
+    // username
+    let postusernamediv = document.createElement('div');
+    postusernamediv.setAttribute('class','postusername');
+    postdiv.appendChild(postusernamediv);
+    let postusername = document.createTextNode(data.username + " asks:");
+    postusernamediv.appendChild(postusername);
+    // question
+    let postcontentdiv = document.createElement('div');
+    postcontentdiv.setAttribute('class','postcontent');
+    postdiv.appendChild(postcontentdiv);
+    let postquestion = document.createTextNode(data.content);
+    postcontentdiv.appendChild(postquestion);
+
+
+}
+
 // async function getPost(askPostID) {
 //     let response = await fetch('http://localhost:4567/post/'+askPostID);
 //     return await response.json();
 // }
-//
+
 // let testvar = getPost('1').then(data=>console.log(data));
 // console.log(testvar);
 
