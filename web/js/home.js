@@ -117,7 +117,11 @@ async function newPost() {
 // }
 
 function closeMyPosts() {
-    document.getElementById("mypoststable").style.display = "none";
+    document.getElementById("mypostscontainer").style.display = "none";
+}
+
+function showMyPosts() {
+    document.getElementById("mypostscontainer").style.display = "block";
 }
 
 async function getMyPosts() {
@@ -139,11 +143,11 @@ async function getMyPosts() {
 }
 
 function displayPost(data) {
-    // post container
+    showMyPosts();
     console.log(data);
     let postdiv = document.createElement('div');
     postdiv.setAttribute('class','post-overlay');
-    document.getElementById('mypostscontainer').append(postdiv);
+    document.getElementById('mypostscontainer').appendChild(postdiv);
     // timestamp
     let posttimediv = document.createElement('div');
     posttimediv.setAttribute('class','posttime');
