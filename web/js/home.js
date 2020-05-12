@@ -117,7 +117,11 @@ async function newPost() {
 // }
 
 function closeMyPosts() {
-    document.getElementById("mypostscontainer").style.display = "none";
+    //document.getElementById("mypostscontainer").style.display = "none";
+    let allposts = document.getElementById('mypostscontainer');
+    while (allposts.firstChild) {
+        allposts.removeChild(allposts.firstChild);
+    }
 }
 
 function showMyPosts() {
@@ -147,6 +151,7 @@ function displayPost(data) {
     console.log(data);
     let postdiv = document.createElement('div');
     postdiv.setAttribute('class','post-overlay');
+    //postdiv.setAttribute('id','postdiv');
     document.getElementById('mypostscontainer').appendChild(postdiv);
     // timestamp
     let posttimediv = document.createElement('div');
