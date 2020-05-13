@@ -47,7 +47,7 @@ public class UserService {
             } catch (Exception e){
                 e.printStackTrace();
             }
-            response.cookie("identifier", cookieval); //Set cookie for future requests
+            response.cookie("identifier", cookieval, 21600); //Set cookie for future requests
 
             cookieJar.addCookie(username, cookieval);
 
