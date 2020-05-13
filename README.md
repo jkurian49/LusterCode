@@ -1,6 +1,7 @@
 How to install and run this project:
 
 git clone https://github.com/jkurian49/LusterCode.git
+
 mvn clean install
 
 Set up mysql database:
