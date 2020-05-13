@@ -1,12 +1,15 @@
 h1 {
     color: darkslategray;
+    margin-left: 80px;
+    top: 10%;
+    font-size: 40px;
 }
 
 .homenav{
-    width: 80%;
+    width: 95%;
     padding: 8px 12px;
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -20,7 +23,7 @@ h1 {
     padding: 16px 20px;
     border: none;
     cursor: pointer;
-    height:100px;
+    height:75px;
     width:200px;
     font-size: 20px;
     vertical-align: top;
@@ -143,7 +146,7 @@ h1 {
     width: 80%;
     padding: 8px 12px;
     position: absolute;
-    margin-top: 40%;
+    margin-top: 35%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -174,3 +177,29 @@ h1 {
 .postcontent {
     padding-left: 25px;
 }
+
+.postanswer-btn {
+    border-radius: 12em;
+    color: darkslategray;
+    border: 0.1em solid white;
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+.myprofile-container {
+    display: none;
+    position: absolute;
+    width: 30%;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    padding: 10px 10px 10px 10px;
+    border: 5px solid grey;
+    font-size: 20px;
+    text-align: center;
+    background: #f1f1f1;
+}
+
