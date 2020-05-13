@@ -108,7 +108,7 @@ function displayPost(data) {
     //         console.warn('Something went wrong.', err);
     //     });
     // });
-    // postdiv.appendChild(answerbtn);
+    postdiv.appendChild(answerbtn);
 }
 
 // function getMyPostsAnswers(askPostID) {
