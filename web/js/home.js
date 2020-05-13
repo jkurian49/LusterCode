@@ -192,8 +192,8 @@ function Answer(content) {
 
 async function showMockInterview(mockintid) {
     closeMockInterviewNav();
-    let questions = [];
-    let answers = [];
+    // let questions = [];
+    // let answers = [];
     fetch('http://localhost:4567/mockinterview/'+mockintid).then(function (response) {
         // The API call was successful!
         return response.json();
@@ -206,24 +206,33 @@ async function showMockInterview(mockintid) {
         let ans = "answerIDs";
         let answerIDs = data[ans];
         let content = "content";
+        let mockintoverlay = document.getElementById('mockintoverlay');
         for (let ii = 0; ii < askPostIDs.length; ii++) {
             let askPostID = askPostIDs[ii];
             let answerID = answerIDs[ii];
             fetch('http://localhost:4567/post/'+askPostID ).then(function (response) {
-                // The API call was successful!
                 return response.json();
             }).then(function (post) {
-                questions[ii] = post.content;
-                //console.log(questions[0].content);
+                console.log(post);
                 fetch('http://localhost:4567/answer/'+answerID ).then(function (response) {
-                    // The API call was successful!
                     return response.json();
                 }).then(function (answer) {
-                    answers[ii] = answer.content;
-                    let questionholder = document.getElementById("mockintquestion");
-                    questionholder.style.display = "block";
-                    questionholder.value = questions[ii];
-                    questionholder.setAttribute("class","question-holder");
+                    //answers[ii] = answer.content;
+                    let qapair = document.createElement('div');
+                    qapair.setAttribute('class','qapair');
+                    let question = document.createTextNode(post.content);
+                    //question.className = 'mockint-question';
+                    qapair.appendChild(question);
+                    let correct_answer = document.createTextNode(answer.content);
+                    //correct_answer.className = 'mockint-answer';
+                    qapair.appendChild(correct_answer);
+                    mockintoverlay.appendChild(qapair); // finally append pair to overlay
+
+
+                    // let questionholder = document.getElementById("mockintquestion");
+                    // questionholder.style.display = "block";
+                    // questionholder.value = questions[ii];
+                    // questionholder.setAttribute("class","question-holder");
                 });
             });
         }
