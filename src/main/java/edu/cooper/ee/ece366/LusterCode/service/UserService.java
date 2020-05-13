@@ -49,6 +49,8 @@ public class UserService {
             }
             response.cookie("identifier", cookieval); //Set cookie for future requests
 
+            cookieJar.addCookie(username, cookieval);
+
             System.out.print(new StringBuilder().append("login successful with new cookie: ").append(cookieval).toString());
 
             return "success";
