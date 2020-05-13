@@ -19,9 +19,12 @@ public class Main {
         String password = "Lusterman";
         Jdbi jdbi = Jdbi.create(url, username, password);
 
+        CookieJarJdbi cookieJar = new CookieJarJdbi(jdbi);
+        cookieJar.populateDb();
+
         UserStoreJdbi userStore = new UserStoreJdbi(jdbi);
         userStore.populateDb();
-        UserService userService = new UserService(userStore);
+        UserService userService = new UserService(userStore, cookieJar);
         UserHandler userHandler = new UserHandler(userService, gson);
 
         PostStoreJdbi postStore = new PostStoreJdbi(jdbi);
@@ -38,6 +41,7 @@ public class Main {
         mockInterviewStoreJdbi.populateDb();
         MockInterviewService mockInterviewService = new MockInterviewService(mockInterviewStoreJdbi);
         MockInterviewHandler mockInterviewHandler = new MockInterviewHandler(mockInterviewService, gson);
+
 
         JsonTransformer jsonTransformer = new JsonTransformer();
 
