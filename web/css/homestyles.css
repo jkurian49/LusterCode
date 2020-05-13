@@ -130,13 +130,29 @@ h1 {
     width: 50em;
     padding: 8px 12px;
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
     text-align: center;
-
 }
+
+.qapair {
+    border: 3px grey solid;
+    padding: 10px 10px 10px 10px;
+}
+
+/*.mockint-question {*/
+/*    padding: 10px 10px 50px 10px;*/
+/*    color:red;*/
+/*}*/
+
+/*.mockint-answer {*/
+/*    padding: 10px 10px 10px 10px;*/
+/*    position: absolute;*/
+/*    margin-top: 30px;*/
+/*    color: red;*/
+/*}*/
 
 .tablebtn {
     background-color: green;
